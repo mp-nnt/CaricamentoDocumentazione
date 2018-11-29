@@ -25,6 +25,10 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+
+			//set Mockdata
+			var sPath = "model/mockData/model.json";
+			this.setModel(new sap.ui.model.json.JSONModel(sPath));
 			/*
 						// get WF task data
 						var startupParameters = this.getComponentData().startupParameters;
