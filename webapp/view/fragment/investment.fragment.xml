@@ -9,7 +9,7 @@
 				<f:formElements>
 					<f:FormElement label="{i18n>totalA}">
 						<f:fields>
-							<Input width="50%" id="totalA_inp" value="{/totalA}"/>
+							<Input width="50%" id="totalA_inp" value="{/totalA}" editable="{path: '/totalA_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -18,7 +18,7 @@
 				<f:formElements>
 					<f:FormElement label="{i18n>totalB}">
 						<f:fields>
-							<Input width="50%" id="totalB_inp" value="{/totalB}"/>
+							<Input width="50%" id="totalB_inp" value="{/totalB}" editable="{path: '/totalB_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -27,22 +27,26 @@
 				<f:formElements>
 					<f:FormElement label="{i18n>tableC_1}">
 						<f:fields>
-							<TextArea id="tableC_1" value="{/tableC_1}" growing="true" width="100%"/>
+							<TextArea id="tableC_1" value="{/tableC_1}" growing="true" width="100%"
+								editable="{path: '/totalC_1_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label=" {i18n>tableC_2}">
 						<f:fields>
-							<TextArea id="tableC_2" value="{/tableC_2}" growing="true" width="100%"/>
+							<TextArea id="tableC_2" value="{/tableC_2}" growing="true" width="100%"
+								editable="{path: '/totalC_2_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>tableC_3}">
 						<f:fields>
-							<TextArea id="tableC_3" value="{/tableC_3}" growing="true" width="100%"/>
+							<TextArea id="tableC_3" value="{/tableC_3}" growing="true" width="100%"
+								editable="{path: '/totalC_3_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>tableC_4}">
 						<f:fields>
-							<TextArea id="tableC_4" value="{/tableC_4}" growing="true" width="100%"/>
+							<TextArea id="tableC_4" value="{/tableC_4}" growing="true" width="100%"
+								editable="{path: '/totalC_4_vrf', formatter: '.formatter.editableFormatter'}"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -62,7 +66,7 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText3}" width="100%"/>
-								<RadioButtonGroup class="sapUiMediumMarginBottom" id="grp">
+								<RadioButtonGroup class="sapUiMediumMarginBottom" id="grp" editable="{path: '/claim_yes_no_vrf', formatter: '.formatter.editableFormatter'}">
 									<buttons>
 										<RadioButton text="{i18n>yes}" selected="{/claimYes}" groupName="gr"/>
 										<RadioButton text="{i18n>no}" selected="{/claimNo}" groupName="gr"/>
@@ -98,6 +102,15 @@
 					<f:FormElement label="{i18n>signature}">
 						<f:fields>
 							<Input width="50%" id="signature" value="{/signature}"/>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+			<f:FormContainer title="{i18n>note}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<Text text="{/noteInv}" width="100%"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

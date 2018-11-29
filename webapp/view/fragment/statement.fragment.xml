@@ -9,7 +9,8 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<RadioButtonGroup class="sapUiMediumMarginBottom" id="company_grp">
+							<RadioButtonGroup class="sapUiMediumMarginBottom" id="company_grp"
+								editable="{path: '/company_vrf', formatter: '.formatter.editableFormatter'}">
 								<buttons>
 									<RadioButton text="{i18n>until9}" selected="{/until9}" groupName="gr_company"/>
 									<RadioButton text="{i18n>between9and49}" selected="{/between9and49}" groupName="gr_company"/>
@@ -34,10 +35,11 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText1}" width="100%"/>
-								<CheckBox text="{i18n>newFactory}" selected="{/newFactory}"/>
-								<CheckBox text="{i18n>increaseFactory}" selected="{/increaseFactory}"/>
-								<CheckBox text="{i18n>newGood}" selected="{/newGood}"/>
-								<CheckBox text="{i18n>newProcess}" selected="{/newProcess}"/>
+								<CheckBox text="{i18n>newFactory}" selected="{/newFactory}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>increaseFactory}" selected="{/increaseFactory}"
+									editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>newGood}" selected="{/newGood}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>newProcess}" selected="{/newProcess}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
 								<FormattedText htmlText="{i18n>claimText2}" width="100%"/>
 							</VBox>
 						</f:fields>
@@ -49,30 +51,50 @@
 					<f:FormElement label="{i18n>score30}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score30_1}" selected="{/score30_1}" wrapping="true"/>
-								<CheckBox text="{i18n>score30_2}" selected="{/score30_2}" wrapping="true"/>
-								<CheckBox text="{i18n>score30_3}" selected="{/score30_3}" wrapping="true"/>
-								<CheckBox text="{i18n>score30_4}" selected="{/score30_4}" wrapping="true"/>
-								<CheckBox text="{i18n>score30_5}" selected="{/score30_5}" wrapping="true"/>
+								<CheckBox text="{i18n>score30_1}" selected="{/score30_1}" wrapping="true"
+									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score30_2}" selected="{/score30_2}" wrapping="true"
+									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score30_3}" selected="{/score30_3}" wrapping="true"
+									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score30_4}" selected="{/score30_4}" wrapping="true"
+									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score30_5}" selected="{/score30_5}" wrapping="true"
+									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>score15}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score15_1}" selected="{/score15_1}" wrapping="true"/>
-								<CheckBox text="{i18n>score15_2}" selected="{/score15_2}" wrapping="true"/>
-								<CheckBox text="{i18n>score15_3}" selected="{/score15_3}" wrapping="true"/>
+								<CheckBox text="{i18n>score15_1}" selected="{/score15_1}" wrapping="true"
+									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score15_2}" selected="{/score15_2}" wrapping="true"
+									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score15_3}" selected="{/score15_3}" wrapping="true"
+									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>score10}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score10_1}" selected="{/score10_1}" wrapping="true"/>
-								<CheckBox text="{i18n>score10_2}" selected="{/score10_2}" wrapping="true"/>
-								<CheckBox text="{i18n>score10_3}" selected="{/score10_3}" wrapping="true"/>
+								<CheckBox text="{i18n>score10_1}" selected="{/score10_1}" wrapping="true"
+									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score10_2}" selected="{/score10_2}" wrapping="true"
+									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>score10_3}" selected="{/score10_3}" wrapping="true"
+									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
 							</VBox>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+			<f:FormContainer title="{i18n>note}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<Text text="{/noteStat}" width="100%"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

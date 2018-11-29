@@ -6,13 +6,32 @@ sap.ui.define([
 	"sap/m/UploadCollectionParameter",
 	"sap/m/library",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/format/FileSizeFormat"
-], function (Controller, jQuery, ObjectMarker, MessageToast, UploadCollectionParameter, MobileLibrary, JSONModel, FileSizeFormat) {
+	"sap/ui/core/format/FileSizeFormat",
+	"com/pabz/CaricamentoDocumentazione/model/formatter"
+], function (Controller, jQuery, ObjectMarker, MessageToast, UploadCollectionParameter, MobileLibrary, JSONModel, FileSizeFormat,
+	formatter) {
 	"use strict";
 
 	return Controller.extend("com.pabz.CaricamentoDocumentazione.controller.Main", {
 
+		formatter: formatter,
+
+		editableFormatter: function (value) {
+			if (value === false) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+
 		onInit: function () {
+			// set mock data
+			var sPath = "model/mockData/document.json";
+			//this.getView().setModel(new JSONModel(sPath), "uploadedDocument");
+			this.getView().setModel(new JSONModel({
+				"items": []
+			}), "uploadedDocument");
+
 			this.getView().setModel(new JSONModel({
 				"items": []
 			}), "file");
@@ -54,9 +73,8 @@ sap.ui.define([
 			});
 		},
 
-		onAfterRendering: function () {
-		},
-		
+		onAfterRendering: function () {},
+
 		createObjectMarker: function (sId, oContext) {
 			var mSettings = null;
 
@@ -363,7 +381,7 @@ sap.ui.define([
 			"luogo": "",
 			"data": "",
 			"signature": ""
-		}
+		},
 
 	});
 });

@@ -1,0 +1,35 @@
+{
+	"items": [{
+		"documentId": "123456",
+		"fileName": "Domanda_di_contributi_bando_2018.doc",
+		"mimeType": "application/msword",
+		"thumbnailUrl": "",
+		"url": "model/mockData/Domanda_di_contributi_bando_2018.doc",
+		"attributes": [{
+			"title": "Uploaded By",
+			"text": "Azienda",
+			"active": false
+		}, {
+			"title": "Uploaded On",
+			"text": "2018-10-28",
+			"active": false
+		}, {
+			"title": "File Size",
+			"text": "25",
+			"active": false
+		}],
+		"statuses": [{
+			"title": "Status",
+			"text": "Error",
+			"state": "Error"
+		}],
+		"markers": [{
+			"type": "Draft"
+		}, {
+			"type": "Favorite"
+		}, {
+			"type": "Flagged"
+		}],
+		"selected": false
+	}]
+}

@@ -1,5 +1,35 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
+	<f:Form editable="true" id="attachmentForm" width="100%">
+		<f:layout>
+			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+		</f:layout>
+		<f:formContainers>
+			<f:FormContainer title="{i18n>UplAttach}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<List id="documentsList" items="{uploadedDocument>/items}">
+								<items>
+									<ObjectListItem title="{fileName}"></ObjectListItem>
+								</items>
+							</List>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+			<f:FormContainer title="{i18n>note}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<Text text="{/noteInv}" width="100%"/>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+		</f:formContainers>
+	</f:Form>
 	<UploadCollection id="UploadCollection" maximumFilenameLength="{settings>/maximumFilenameLength}"
 		maximumFileSize="{settings>/maximumFileSize}" multiple="true" change="onChange" fileDeleted="onFileDeleted"
 		filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed" fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}"
