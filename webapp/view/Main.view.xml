@@ -1,0 +1,69 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:commons="sap.ui.commons"
+	controllerName="com.pabz.CaricamentoDocumentazione.controller.Main" displayBlock="true">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>title}" showHeader="false">
+				<content>
+					<l:ResponsiveSplitter defaultPane="paneC" id="main">
+						<l:rootPaneContainer>
+							<l:PaneContainer orientation="Horizontal" id="container1">
+								<l:panes>
+									<l:SplitPane id="paneL">
+										<l:content>
+											<Panel backgroundDesign="Transparent" id="panelL">
+												<layoutData>
+													<l:SplitterLayoutData id="dataL" resizable="false" size="20%"/>
+												</layoutData>
+											</Panel>
+										</l:content>
+									</l:SplitPane>
+									<l:SplitPane requiredParentWidth="50" id="paneC">
+										<l:content>
+											<Panel backgroundDesign="Transparent" id="panelC">
+												<layoutData>
+													<l:SplitterLayoutData id="dataC" resizable="false" size="auto"/>
+												</layoutData>
+												<IconTabBar id="bar" backgroundDesign="Transparent" headerBackgroundDesign="Translucent">
+													<items>
+														<IconTabFilter id="personalData" icon="sap-icon://account" text="{i18n>personalData}">
+															<core:Fragment fragmentName="com.pabz.CaricamentoDocumentazione.view.fragment.personalData" type="XML"/>
+														</IconTabFilter>
+														<IconTabFilter id="statement" icon="sap-icon://task" text="{i18n>statement}">
+															<content>
+																<core:Fragment fragmentName="com.pabz.CaricamentoDocumentazione.view.fragment.statement" type="XML"/>
+															</content>
+														</IconTabFilter>
+														<IconTabFilter id="investment" icon="sap-icon://monitor-payments" text="{i18n>investment}">
+															<content>
+																<core:Fragment fragmentName="com.pabz.CaricamentoDocumentazione.view.fragment.investment" type="XML"/>
+															</content>
+														</IconTabFilter>
+														<IconTabFilter id="attachment" icon="sap-icon://attachment" text="{i18n>attachment}">
+															<content>
+																<core:Fragment fragmentName="com.pabz.CaricamentoDocumentazione.view.fragment.attachment" type="XML"/>
+															</content>
+														</IconTabFilter>
+													</items>
+												</IconTabBar>
+											</Panel>
+										</l:content>
+									</l:SplitPane>
+									<l:SplitPane id="paneR">
+										<l:content>
+											<Panel backgroundDesign="Transparent" id="panelR">
+												<layoutData>
+													<l:SplitterLayoutData id="dataR" resizable="false" size="20%"/>
+												</layoutData>
+											</Panel>
+										</l:content>
+									</l:SplitPane>
+								</l:panes>
+							</l:PaneContainer>
+						</l:rootPaneContainer>
+					</l:ResponsiveSplitter>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
