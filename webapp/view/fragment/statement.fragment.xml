@@ -1,4 +1,4 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table">
 	<f:Form editable="true" id="statementForm" width="100%">
 		<f:layout>
 			<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
@@ -41,6 +41,35 @@
 								<CheckBox text="{i18n>newGood}" selected="{/newGood}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
 								<CheckBox text="{i18n>newProcess}" selected="{/newProcess}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
 								<FormattedText htmlText="{i18n>claimText2}" width="100%"/>
+							</VBox>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+			<f:FormContainer title="{i18n>claim}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<VBox>
+								<CheckBox text="{i18n>claim3_1}" selected="{/claim3_1}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>claim3_2}" selected="{/claim3_2}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<CheckBox text="{i18n>claim3_3}" selected="{/claim3_3}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<t:Table rows="{/claim3_tbl}" selectionMode="None" visibleRowCount="5">
+									<t:columns>
+										<t:Column>
+											<Label text="{i18n>claim3_tipo}"/>
+											<t:template>
+												<Input value="{tipologia}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+											</t:template>
+										</t:Column>
+										<t:Column>
+											<Label text="{i18n>claim3_importo}"/>
+											<t:template>
+												<Input value="{importoEuro}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+											</t:template>
+										</t:Column>
+									</t:columns>
+								</t:Table>
 							</VBox>
 						</f:fields>
 					</f:FormElement>

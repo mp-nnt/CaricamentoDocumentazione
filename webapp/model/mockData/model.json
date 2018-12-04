@@ -2,7 +2,7 @@
 	"surname": "Rossi",
 	"surname_vrf": true,
 	"name": "Mario",
-	"owner": "Rossi Marianna",
+	"owner": "Rossi Srl",
 	"owner_vrf": true,
 	"piva": "",
 	"piva_vrf": false,
@@ -28,7 +28,7 @@
 	"streetNumber": "",
 	"telephone": "",
 	"telephone_vrf": false,
-	"mail": "mario.rossi@gmail.com",
+	"mail": "mario.rossi@rossisrl.com",
 	"mail_vrf": true,
 	"pec": "",
 	"pec_vrf": false,
@@ -46,6 +46,26 @@
 	"newGood": false,
 	"newProcess": false,
 	"claim_vrf": true,
+	"claim3_1": false,
+	"claim3_2": false,
+	"claim3_3": false,
+	"claim3_vrf": false,
+	"claim3_tbl": [{
+		"tipologia": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"importoEuro": ""
+	}],
 	"score30_1": false,
 	"score30_2": false,
 	"score30_3": true,
@@ -61,8 +81,89 @@
 	"score10_3": true,
 	"claimScore10_vrf": true,
 	"noteStat": "Ok",
+	"tableA": [{
+		"tipologia": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}],
 	"totalA": "7.500,00",
 	"totalA_vrf": true,
+	"tableB": [{
+		"tipologia": "Arredamenti",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Hardware",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Software funzionali agli investimenti agevolabili",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Macchinari ed impianti",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Macchine operatrici",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Attrezzature",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Veicoli Speciali",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Autoveicoli per il trasporto di persone per agenti e rappresentanti di commercio, per attività di trasporto con taxi e noleggio di autovetture con conducente",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}, {
+		"tipologia": "Veicoli per il trasporto di cose per le imprese di commercio su aree pubbliche",
+		"luogo": "",
+		"inizio": "",
+		"fine": "",
+		"importoEuro": ""
+	}],
 	"totalB": "1.000,00",
 	"totalB_vrf": true,
 	"tableC_1": "Ampliato stabilimento di Trento",
@@ -79,5 +180,39 @@
 	"luogo": "Bolzano",
 	"data": "15.11.2018",
 	"signature": "Mario Rossi",
-	"noteInv": "Attenzione, compilare correttamente Tabella C"
+	"noteInv": "Attenzione, compilare correttamente Tabella C",
+	"Settlement": [{
+		"fornitore": "DeLonghi",
+		"descrizione": "Caldaia",
+		"fattura": "1524",
+		"dataS": "31.08.2018",
+		"imponibile": "4.050,00"
+	}, {
+		"fornitore": "",
+		"descrizione": "",
+		"fattura": "",
+		"dataS": "",
+		"imponibile": ""
+	}],
+	"UplDocument": [{
+		"documentId": "12_1524_2018",
+		"fileName": "2018.doc",
+		"mimeType": "application/msword",
+		"thumbnailUrl": "",
+		"url": ""
+	}],
+	"VerifyDocument": [{
+		"documentId": "11_1524_2018",
+		"fileName": "FotocopiaCartaIdentità_2018.doc",
+		"mimeType": "application/msword",
+		"thumbnailUrl": "",
+		"url": ""
+	}],
+	"SettlementDocument": [{
+		"documentId": "1524_2018",
+		"fileName": "FatturaDelonghi_1524_2018.doc",
+		"mimeType": "application/msword",
+		"thumbnailUrl": "",
+		"url": ""
+	}]
 }
