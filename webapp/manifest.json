@@ -10,8 +10,18 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"sourceTemplate": {
-			"id": "ui5template.basicSAPUI5ApplicationProject",
-			"version": "1.40.12"
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZPAB_GRANTOR_SRV": {
+				"uri": "/sap/opu/odata/sap/ZPAB_GRANTOR_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -57,6 +67,16 @@
 				"settings": {
 					"bundleName": "com.pabz.CaricamentoDocumentazione.i18n.i18n"
 				}
+			},
+			"oData": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZPAB_GRANTOR_SRV",
+				"preload": true
 			}
 		},
 		"resources": {

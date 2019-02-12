@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc">
 	<f:Form editable="true" id="attachmentForm" width="100%">
 		<f:layout>
 			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
@@ -19,47 +19,6 @@
 					</f:FormElement>
 				</f:formElements>
 			</f:FormContainer>
-			<f:FormContainer title="{i18n>note}">
-				<f:formElements>
-					<f:FormElement>
-						<f:fields>
-							<Text text="{/noteInv}" width="100%"/>
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
 		</f:formContainers>
 	</f:Form>
-	<UploadCollection id="UploadCollection" maximumFilenameLength="{settings>/maximumFilenameLength}"
-		maximumFileSize="{settings>/maximumFileSize}" multiple="true" change="onChange" fileDeleted="onFileDeleted"
-		filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed" fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}"
-		selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch" uploadComplete="onUploadComplete"
-		beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated" items="{ path: 'file>/items', templateShareable: false }"
-		numberOfAttachmentsText="Uploaded" showSeparators="{settings>/showSeparators}" uploadEnabled="{settings>/uploadEnabled}"
-		uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
-		<toolbar>
-			<OverflowToolbar id="myId">
-				<Title id="attachmentTitle"/>
-				<ToolbarSpacer/>
-				<Button id="deleteSelectedButton" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false" type="Transparent"/>
-				<ToggleButton id="selectAllButton" text="Select all" press="onSelectAllPress" enabled="false" visible="false" type="Transparent"/>
-				<UploadCollectionToolbarPlaceholder/>
-			</OverflowToolbar>
-		</toolbar>
-		<items>
-			<UploadCollectionItem documentId="{file>documentId}" fileName="{file>fileName}" mimeType="{file>mimeType}"
-				thumbnailUrl="{file>thumbnailUrl}" url="{file>url}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}"
-				visibleDelete="{settings>/visibleDelete}" visibleEdit="{settings>/visibleEdit}"
-				attributes="{path : 'file>attributes', templateShareable : false}" statuses="{path : 'file>statuses', templateShareable : false}"
-				markers="{path : 'file>markers', factory: '.createObjectMarker'}" selected="{file>selected}">
-				<attributes>
-					<ObjectAttribute title="{file>title}" text="{path : 'file>text', formatter : '.formatAttribute'}" active="{file>active}"
-						press="onAttributePress"/>
-				</attributes>
-				<statuses>
-					<ObjectStatus title="{file>title}" text="{file>text}" state="{file>state}"/>
-				</statuses>
-			</UploadCollectionItem>
-		</items>
-	</UploadCollection>
 </core:FragmentDefinition>

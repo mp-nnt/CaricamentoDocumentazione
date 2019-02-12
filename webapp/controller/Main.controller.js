@@ -6,382 +6,281 @@ sap.ui.define([
 	"sap/m/UploadCollectionParameter",
 	"sap/m/library",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/format/FileSizeFormat",
-	"com/pabz/CaricamentoDocumentazione/model/formatter"
-], function (Controller, jQuery, ObjectMarker, MessageToast, UploadCollectionParameter, MobileLibrary, JSONModel, FileSizeFormat,
-	formatter) {
+	"sap/ui/core/format/FileSizeFormat"
+], function (Controller, jQuery, ObjectMarker, MessageToast, UploadCollectionParameter, MobileLibrary, JSONModel, FileSizeFormat) {
 	"use strict";
 
 	return Controller.extend("com.pabz.CaricamentoDocumentazione.controller.Main", {
 
-		formatter: formatter,
-
-		editableFormatter: function (value) {
-			if (value === false) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-
 		onInit: function () {
-			// set mock data
-			var sPath = "model/mockData/document.json";
-			//this.getView().setModel(new JSONModel(sPath), "uploadedDocument");
 			this.getView().setModel(new JSONModel({
 				"items": []
 			}), "uploadedDocument");
-
-			this.getView().setModel(new JSONModel({
-				"items": []
-			}), "file");
-
-			this.getView().setModel(new JSONModel({
-				"maximumFilenameLength": 55,
-				"maximumFileSize": 10,
-				"mode": MobileLibrary.ListMode.SingleSelectMaster,
-				"uploadEnabled": true,
-				"uploadButtonVisible": true,
-				"enableEdit": true,
-				"enableDelete": true,
-				"visibleEdit": true,
-				"visibleDelete": true,
-				"listSeparatorItems": [
-					MobileLibrary.ListSeparators.All,
-					MobileLibrary.ListSeparators.None
-				],
-				"showSeparators": MobileLibrary.ListSeparators.All,
-				"listModeItems": [{
-					"key": MobileLibrary.ListMode.SingleSelectMaster,
-					"text": "Single"
-				}, {
-					"key": MobileLibrary.ListMode.MultiSelect,
-					"text": "Multi"
-				}]
-			}), "settings");
-
-			this.getView().setModel(new JSONModel({
-				"items": ["jpg", "txt", "ppt", "doc", "xls", "pdf", "png"],
-				"selected": ["jpg", "txt", "ppt", "doc", "xls", "pdf", "png"]
-			}), "fileTypes");
-
-			// Sets the text to the label
-			this.byId("UploadCollection").addEventDelegate({
-				onBeforeRendering: function () {
-					this.byId("attachmentTitle").setText(this.getAttachmentTitleText());
-				}.bind(this)
-			});
 		},
 
-		onAfterRendering: function () {},
+		onAfterRendering: function () {
 
-		createObjectMarker: function (sId, oContext) {
-			var mSettings = null;
+			var oModel = this.getView().getModel();
+			var oDocUplModel = this.getView().getModel("uploadedDocument");
+			var oDocUplModelData = oDocUplModel.getData();
+			var data = oModel.getData();
 
-			if (oContext.getProperty("type")) {
-				mSettings = {
-					type: "{type}",
-					press: this.onMarkerPress
-				};
+			for (var i in data.CartaIdentità) {
+				oDocUplModelData.items.push(data.CartaIdentità[i]);
 			}
-			return new ObjectMarker(sId, mSettings);
-		},
-
-		formatAttribute: function (sValue) {
-			if (jQuery.isNumeric(sValue)) {
-				return FileSizeFormat.getInstance({
-					binaryFilesize: false,
-					maxFractionDigits: 1,
-					maxIntegerDigits: 3
-				}).format(sValue);
-			} else {
-				return sValue;
+			for (var i in data.Preventivi) {
+				oDocUplModelData.items.push(data.Preventivi[i]);
 			}
-		},
-
-		onChange: function (oEvent) {
-			var oUploadCollection = oEvent.getSource();
-			// Header Token
-			var oCustomerHeaderToken = new UploadCollectionParameter({
-				name: "x-csrf-token",
-				value: "Fetch"
-			});
-			oUploadCollection.addHeaderParameter(oCustomerHeaderToken);
-		},
-
-		onFileDeleted: function (oEvent) {
-			this.deleteItemById(oEvent.getParameter("documentId"));
-			MessageToast.show(oEvent.getParameter("fileName") + " deleted");
-		},
-
-		deleteItemById: function (sItemToDeleteId) {
-			var oData = this.byId("UploadCollection").getModel("file").getData();
-			var aItems = jQuery.extend(true, {}, oData).items;
-			jQuery.each(aItems, function (index) {
-				if (aItems[index] && aItems[index].documentId === sItemToDeleteId) {
-					aItems.splice(index, 1);
-				}
-			});
-			this.byId("UploadCollection").getModel("file").setData({
-				"items": aItems
-			});
-			this.byId("attachmentTitle").setText(this.getAttachmentTitleText());
-		},
-
-		deleteMultipleItems: function (aItemsToDelete) {
-			var oData = this.byId("UploadCollection").getModel("file").getData();
-			var nItemsToDelete = aItemsToDelete.length;
-			var aItems = jQuery.extend(true, {}, oData).items;
-			var i = 0;
-			jQuery.each(aItems, function (index) {
-				if (aItems[index]) {
-					for (i = 0; i < nItemsToDelete; i++) {
-						if (aItems[index].documentId === aItemsToDelete[i].getDocumentId()) {
-							aItems.splice(index, 1);
-						}
-					}
-				}
-			});
-			this.byId("UploadCollection").getModel("file").setData({
-				"items": aItems
-			});
-			this.byId("attachmentTitle").setText(this.getAttachmentTitleText());
-		},
-
-		onFilenameLengthExceed: function () {
-			MessageToast.show("FilenameLengthExceed event triggered.");
-		},
-
-		onFileRenamed: function (oEvent) {
-			var oData = this.byId("UploadCollection").getModel("file").getData();
-			var aItems = jQuery.extend(true, {}, oData).items;
-			var sDocumentId = oEvent.getParameter("documentId");
-			jQuery.each(aItems, function (index) {
-				if (aItems[index] && aItems[index].documentId === sDocumentId) {
-					aItems[index].fileName = oEvent.getParameter("item").getFileName();
-				}
-			});
-			this.byId("UploadCollection").getModel("file").setData({
-				"items": aItems
-			});
-		},
-
-		onFileSizeExceed: function () {
-			MessageToast.show("FileSizeExceed event triggered.");
-		},
-
-		onTypeMissmatch: function () {
-			MessageToast.show("TypeMissmatch event triggered.");
-		},
-
-		onUploadComplete: function (oEvent) {
-			var oUploadCollection = this.byId("UploadCollection");
-			var oData = oUploadCollection.getModel("file").getData();
-
-			oData.items.unshift({
-				"documentId": jQuery.now().toString(), // generate Id,
-				"fileName": oEvent.getParameter("files")[0].fileName,
-				"mimeType": "",
-				"thumbnailUrl": "",
-				"url": "",
-				"attributes": [{
-						"title": "Uploaded By",
-						"text": "You",
-						"active": false
-					}, {
-						"title": "Uploaded On",
-						"text": new Date(jQuery.now()).toLocaleDateString(),
-						"active": false
-					}
-					//, 
-					//{
-					//	"title": "File Size",
-					//	"text": "505000",
-					//	"active": false
-					//}
-				],
-				"statuses": [{
-					"title": "",
-					"text": "",
-					"state": "None"
-				}],
-				"markers": [{}],
-				"selected": false
-			});
-			this.getView().getModel("file").refresh();
-
-			// Sets the text to the label
-			this.byId("attachmentTitle").setText(this.getAttachmentTitleText());
-		},
-
-		onBeforeUploadStarts: function (oEvent) {
-			// Header Slug
-			var oCustomerHeaderSlug = new UploadCollectionParameter({
-				name: "slug",
-				value: oEvent.getParameter("fileName")
-			});
-			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
-		},
-
-		onUploadTerminated: function () {
-			/*
-			// get parameter file name
-			var sFileName = oEvent.getParameter("fileName");
-			// get a header parameter (in case no parameter specified, the callback function getHeaderParameter returns all request headers)
-			var oRequestHeaders = oEvent.getParameters().getHeaderParameter();
-			*/
-		},
-
-		onFileTypeChange: function (oEvent) {
-			this.byId("UploadCollection").setFileType(oEvent.getSource().getSelectedKeys());
-		},
-
-		onSelectAllPress: function (oEvent) {
-			var oUploadCollection = this.byId("UploadCollection");
-			if (!oEvent.getSource().getPressed()) {
-				this.deselectAllItems(oUploadCollection);
-				oEvent.getSource().setPressed(false);
-				oEvent.getSource().setText("Select all");
-			} else {
-				this.deselectAllItems(oUploadCollection);
-				oUploadCollection.selectAll();
-				oEvent.getSource().setPressed(true);
-				oEvent.getSource().setText("Deselect all");
+			for (var i in data.Dichiarazioni) {
+				oDocUplModelData.items.push(data.Dichiarazioni[i]);
 			}
-			this.onSelectionChange(oEvent);
-		},
-
-		deselectAllItems: function (oUploadCollection) {
-			var aItems = oUploadCollection.getItems();
-			for (var i = 0; i < aItems.length; i++) {
-				oUploadCollection.setSelectedItem(aItems[i], false);
+			for (var i in data.Pagamenti) {
+				oDocUplModelData.items.push(data.Pagamenti[i]);
 			}
-		},
-
-		getAttachmentTitleText: function () {
-			var aItems = this.byId("UploadCollection").getItems();
-			return "Uploaded (" + aItems.length + ")";
-		},
-
-		onModeChange: function (oEvent) {
-			var oSettingsModel = this.getView().getModel("settings");
-			if (oEvent.getParameters().selectedItem.getProperty("key") === MobileLibrary.ListMode.MultiSelect) {
-				oSettingsModel.setProperty("/visibleEdit", false);
-				oSettingsModel.setProperty("/visibleDelete", false);
-				this.enableToolbarItems(true);
-			} else {
-				oSettingsModel.setProperty("/visibleEdit", true);
-				oSettingsModel.setProperty("/visibleDelete", true);
-				this.enableToolbarItems(false);
+			for (var i in data.Altro) {
+				oDocUplModelData.items.push(data.Altro[i]);
 			}
+
+			oDocUplModel.refresh();
+
 		},
 
-		enableToolbarItems: function (status) {
-			this.byId("selectAllButton").setVisible(status);
-			this.byId("deleteSelectedButton").setVisible(status);
-			this.byId("selectAllButton").setEnabled(status);
-			// This is only enabled if there is a selected item in multi-selection mode
-			if (this.byId("UploadCollection").getSelectedItems().length > 0) {
-				this.byId("deleteSelectedButton").setEnabled(true);
-			}
-		},
+		// ---------------------------------------------------------------------------------- Start funzioni generiche
 
-		onDeleteSelectedItems: function () {
-			var aSelectedItems = this.byId("UploadCollection").getSelectedItems();
-			this.deleteMultipleItems(aSelectedItems);
-			if (this.byId("UploadCollection").getSelectedItems().length < 1) {
-				this.byId("selectAllButton").setPressed(false);
-				this.byId("selectAllButton").setText("Select all");
-			}
-			MessageToast.show("Delete selected items button press.");
-		},
+		// ---------------------------------------------------------------------------------- End funzioni generiche
 
-		onSelectionChange: function () {
-			var oUploadCollection = this.byId("UploadCollection");
-			// Only it is enabled if there is a selected item in multi-selection mode
-			if (oUploadCollection.getMode() === MobileLibrary.ListMode.MultiSelect) {
-				if (oUploadCollection.getSelectedItems().length > 0) {
-					this.byId("deleteSelectedButton").setEnabled(true);
+		// ---------------------------------------------------------------------------------- Start funzioni WF 
+		completeTask: function (approvalStatus) {
+
+			var taskId = this.getOwnerComponent().taskId;
+			var instanceId = this.getOwnerComponent().instanceId;
+			var token = this._fetchToken();
+			var oModel = this.getView().getModel();
+			oModel.setProperty("/confirmDoc", approvalStatus);
+
+			if (taskId === null) {
+
+				if (instanceId === undefined) {
+
+					oModel.setProperty("/Azienda", "Azienda"); // Andrà sostituito con gruppo Azienda
+
+					// creo il task id
+					$.ajax({
+						url: "/bpmworkflowruntime/rest/v1/workflow-instances",
+						method: "POST",
+						contentType: "application/json",
+						async: false,
+						data: JSON.stringify({
+							definitionId: "bando",
+							context: oModel.getData()
+						}),
+						headers: {
+							"X-CSRF-Token": token
+						},
+						success: function (result, xhr, data) {
+							this.getOwnerComponent().instanceId = result.id;
+							this._taskIdfromInstance(result.id, token, true);
+						}.bind(this)
+					});
+
 				} else {
-					this.byId("deleteSelectedButton").setEnabled(false);
+					this._taskIdfromInstance(instanceId, token, true);
 				}
+
+			} else {
+				this._completeTask(taskId, oModel, token);
 			}
+
 		},
 
-		onAttributePress: function (oEvent) {
-			MessageToast.show("Attribute press event - " + oEvent.getSource().getTitle() + ": " + oEvent.getSource().getText());
+		_completeTask: function (taskId, oModel, token) {
+
+			var dataContext;
+
+			// se chiamo la Patch devo completare il task!
+			dataContext = JSON.stringify({
+				status: "COMPLETED",
+				context: oModel.getData()
+			});
+
+			$.ajax({
+				url: "/bpmworkflowruntime/rest/v1/task-instances/" + taskId,
+				method: "PATCH",
+				contentType: "application/json",
+				async: false,
+				data: dataContext,
+				headers: {
+					"X-CSRF-Token": token
+				},
+				success: function (result, xhr, data) {
+					sap.m.MessageToast.show("Task Saved");
+					this.getView().setBusy(false);
+					this.getOwnerComponent().taskId = null;
+				}.bind(this),
+				error: function (oError) {}
+			});
 		},
 
-		onMarkerPress: function (oEvent) {
-			MessageToast.show("Marker press event - " + oEvent.getSource().getType());
+		_taskIdfromInstance: function (instanceId, token, toComplete) {
+
+			$.ajax({
+				url: "/bpmworkflowruntime/rest/v1/task-instances?workflowInstanceId=" + instanceId,
+				method: "GET",
+				async: false,
+				headers: {
+					"X-CSRF-Token": token
+				},
+				success: function (result, xhr, data) {
+					var oModel = this.getView().getModel();
+					this.getOwnerComponent().taskId = result[result.length - 1].id;
+					if (toComplete) {
+						this._completeTask(this.getOwnerComponent().taskId, oModel, token);
+					}
+				}.bind(this),
+				error: function (oError) {}
+			});
 		},
 
-		onOpenAppSettings: function (oEvent) {
-			if (!this.oSettingsDialog) {
-				this.oSettingsDialog = sap.ui.xmlfragment("sap.m.sample.UploadCollection.AppSettings", this);
-				this.getView().addDependent(this.oSettingsDialog);
+		_fetchToken: function () {
+			var token;
+			$.ajax({
+				url: "/bpmworkflowruntime/rest/v1/xsrf-token",
+				method: "GET",
+				async: false,
+				headers: {
+					"X-CSRF-Token": "Fetch"
+				},
+				success: function (result, xhr, data) {
+					token = data.getResponseHeader("X-CSRF-Token");
+				}
+			});
+			return token;
+		},
+
+		getInstanceId: function () {
+
+			return jQuery.sap.getUriParameters().get("wfId");
+
+		},
+
+		getTaskIdFromInstance: function (instanceId) {
+
+			var token = this._fetchToken();
+			this._taskIdfromInstance(instanceId, token, false);
+
+		},
+
+		getInstanceIdFromTask: function (taskId) {
+
+			var token = this._fetchToken();
+			$.ajax({
+				url: "/bpmworkflowruntime/rest/v1/task-instances/" + taskId,
+				method: "GET",
+				async: false,
+				headers: {
+					"X-CSRF-Token": token
+				},
+				success: function (result, xhr, data) {
+					return result[0].workflowInstanceId;
+				}
+			});
+
+		},
+
+		// ---------------------------------------------------------------------------------- End funzioni WF 
+
+		// ---------------------------------------------------------------------------------- Start Azioni Toolbar
+		onSave: function () {
+
+			this.getView().setBusy(true);
+
+			// salvo task senza completare
+			this.completeTask(false);
+
+		},
+
+		onConfirm: function () {
+
+			this.getView().setBusyIndicatorDelay(0);
+			this.getView().setBusy(true);
+
+			// completo task e creo la richiesta
+			this.completeTask(true);
+			this.requestUpdate();
+
+		},
+
+		requestUpdate: function () {
+
+			var oModel = this.getView().getModel("oData");
+			oModel.setUseBatch(true);
+			var changeSetId = "abc";
+			oModel.setDeferredGroups([changeSetId]);
+			var mParameters = {
+				"groupId": changeSetId,
+				"changeSetId": changeSetId
+			};
+
+			var batchSuccess = function (oData) {
+				var reqGuid = oData.__batchResponses[0].__changeResponses[0].data.Guid;
+				this.getView().getModel().setProperty("Guid", reqGuid);
+				this.getView().setBusy(false);
+				sap.m.MessageToast.show("Richiesta aggiornata");
+				this.getView().byId("btn_save").setEnabled(false);
+				this.getView().byId("btn_confirm").setEnabled(false);
+			}.bind(this);
+
+			var batchError = function (err) {
+				this.getView().setBusy(false);
+				sap.m.MessageBox.error(err.message);
+			}.bind(this);
+
+			this._odataHeaderUpdate(mParameters);
+			this._odataDocCreate(mParameters);
+			oModel.submitChanges({
+				"groupId": changeSetId,
+				//"changeSetId": changeSetId,
+				"success": batchSuccess,
+				"error": batchError
+			});
+		},
+
+		_odataHeaderUpdate: function (param) {
+
+			var oModel = this.getView().getModel();
+			var oDataModel = this.getView().getModel("oData");
+			var entity = {};
+			entity["Guid"] = oModel.getProperty("/Guid");
+
+			oDataModel.update("/nuovaRichiestaSet", entity, param);
+
+		},
+
+		_odataDocCreate: function (param) {
+			var oDataModel = this.getView().getModel("oData");
+			var entity;
+			for (var i in this.fileUploaded) {
+
+				entity = {};
+				entity["Description"] = this.fileUploaded[i].fileId;
+				entity["Tipologia"] = "ZDOC_ALTRO";
+				entity["Nome"] = this.fileUploaded[i].fileName;
+				entity["Mimetype"] = this.fileUploaded[i].fileMimeType;
+				entity["Dimensione"] = this.fileUploaded[i].fileDimension;
+				entity["Estensione"] = this.fileUploaded[i].fileExtension;
+				entity["Content"] = this.fileUploaded[i].fileContent;
+
+				oDataModel.create("/documentiRichiestaSet", entity, param);
+
 			}
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this.oSettingsDialog);
-			this.oSettingsDialog.open();
+
 		},
 
-		onDialogCloseButton: function () {
-			this.oSettingsDialog.close();
-		},
+		// ---------------------------------------------------------------------------------- End Azioni Toolbar
 
-		dataModel: {
-			"surname": "",
-			"name": "",
-			"owner": "",
-			"piva": "",
-			"fiscalCode": "",
-			"craft": false,
-			"industry": false,
-			"trade": false,
-			"services": false,
-			"freelance": false,
-			"state": "",
-			"region": "",
-			"postCode": "",
-			"city": "",
-			"district": "",
-			"street": "",
-			"streetNumber": "",
-			"telephone": "",
-			"mail": "",
-			"pec": "",
-			"iban": "",
-			"italian": false,
-			"german": false,
-			"until9": false,
-			"between9and49": false,
-			"newFactory": false,
-			"increaseFactory": false,
-			"newGood": false,
-			"newProcess": false,
-			"score30_1": false,
-			"score30_2": false,
-			"score30_3": false,
-			"score30_4": false,
-			"score30_5": false,
-			"score15_1": false,
-			"score15_2": false,
-			"score15_3": false,
-			"score10_1": false,
-			"score10_2": false,
-			"score10_3": false,
-			"totalA": "",
-			"totalB": "",
-			"tableC_1": "",
-			"tableC_2": "",
-			"tableC_3": "",
-			"tableC_4": "",
-			"claimYes": false,
-			"claimNo": false,
-			"luogo": "",
-			"data": "",
-			"signature": ""
-		},
+		// ---------------------------------------------------------------------------------- Start File Uploader
+
+		// ---------------------------------------------------------------------------------- End File Uploader
 
 	});
 });

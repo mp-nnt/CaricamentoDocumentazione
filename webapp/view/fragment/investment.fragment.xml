@@ -1,52 +1,123 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
-	<f:Form editable="true" id="investmentForm" width="100%">
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
+	xmlns:u="sap.ui.unified">
+	<f:Form editable="true" id="investmentForm" width="100%" class="investimento-form">
 		<f:layout>
 			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
-				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
 		</f:layout>
 		<f:formContainers>
 			<f:FormContainer title="{i18n>tableA}">
 				<f:formElements>
-					<f:FormElement label="{i18n>totalA}">
+					<f:FormElement>
 						<f:fields>
-							<Input width="50%" id="totalA_inp" value="{/totalA}" editable="{path: '/totalA_vrf', formatter: '.formatter.editableFormatter'}"/>
+							<t:Table selectionMode="None" rows="{/tableA}" visibleRowCount="5">
+								<t:columns>
+									<t:Column sortProperty="tipologia" filterProperty="tipologia">
+										<t:multiLabels>
+											<Label text="Tipologia degli investimenti e luogo" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Input value="{tipologia}" editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="inizio" filterProperty="inizio" headerSpan="2,1">
+										<t:multiLabels>
+											<Label text="Inizio - Fine" textAlign="Center" width="100%"/>
+											<Label text="Dal" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<DatePicker value="{path: 'inizio', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
+												editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="fine" filterProperty="fine">
+										<t:multiLabels>
+											<Label text="Inizio - Fine" textAlign="Center" width="100%"/>
+											<Label text="Fine" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<DatePicker value="{path: 'fine', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
+												editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="importoEuro" filterProperty="importoEuro">
+										<t:multiLabels>
+											<Label text="Imponibile Euro" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableAChange" editable="false"
+												class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement>
+						<f:fields>
+							<u:Currency value="{/totalA}" currency="EUR" useSymbol="true" class="investimento-form-currency"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
 			</f:FormContainer>
 			<f:FormContainer title="{i18n>tableB}">
 				<f:formElements>
-					<f:FormElement label="{i18n>totalB}">
+					<f:FormElement>
 						<f:fields>
-							<Input width="50%" id="totalB_inp" value="{/totalB}" editable="{path: '/totalB_vrf', formatter: '.formatter.editableFormatter'}"/>
+							<t:Table selectionMode="None" rows="{/tableB}" visibleRowCount="9">
+								<t:columns>
+									<t:Column sortProperty="tipologia" filterProperty="tipologia">
+										<t:multiLabels>
+											<Label text="Tipologia degli investimenti" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Text text="{tipologia}"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="luogo" filterProperty="luogo">
+										<t:multiLabels>
+											<Label text="Luogo" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Input value="{luogo}" editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="inizio" filterProperty="inizio" headerSpan="2,1">
+										<t:multiLabels>
+											<Label text="Inizio - Fine" textAlign="Center" width="100%"/>
+											<Label text="Dal" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<DatePicker value="{path: 'inizio', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
+												editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="fine" filterProperty="fine">
+										<t:multiLabels>
+											<Label text="Inizio - Fine" textAlign="Center" width="100%"/>
+											<Label text="Fine" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<DatePicker value="{path: 'fine', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
+												editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="importoEuro" filterProperty="importoEuro">
+										<t:multiLabels>
+											<Label text="Imponibile Euro" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableBChange" editable="false"
+												class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
 						</f:fields>
 					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
-			<f:FormContainer title="{i18n>tableC}">
-				<f:formElements>
-					<f:FormElement label="{i18n>tableC_1}">
+					<f:FormElement>
 						<f:fields>
-							<TextArea id="tableC_1" value="{/tableC_1}" growing="true" width="100%"
-								editable="{path: '/totalC_1_vrf', formatter: '.formatter.editableFormatter'}"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label=" {i18n>tableC_2}">
-						<f:fields>
-							<TextArea id="tableC_2" value="{/tableC_2}" growing="true" width="100%"
-								editable="{path: '/totalC_2_vrf', formatter: '.formatter.editableFormatter'}"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="{i18n>tableC_3}">
-						<f:fields>
-							<TextArea id="tableC_3" value="{/tableC_3}" growing="true" width="100%"
-								editable="{path: '/totalC_3_vrf', formatter: '.formatter.editableFormatter'}"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="{i18n>tableC_4}">
-						<f:fields>
-							<TextArea id="tableC_4" value="{/tableC_4}" growing="true" width="100%"
-								editable="{path: '/totalC_4_vrf', formatter: '.formatter.editableFormatter'}"/>
+							<u:Currency value="{/totalB}" currency="EUR" useSymbol="true" class="investimento-form-currency"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -66,12 +137,8 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText3}" width="100%"/>
-								<RadioButtonGroup class="sapUiMediumMarginBottom" id="grp" editable="{path: '/claim_yes_no_vrf', formatter: '.formatter.editableFormatter'}">
-									<buttons>
-										<RadioButton text="{i18n>yes}" selected="{/claimYes}" groupName="gr"/>
-										<RadioButton text="{i18n>no}" selected="{/claimNo}" groupName="gr"/>
-									</buttons>
-								</RadioButtonGroup>
+								<Text text="{i18n>yes}" visible="{/claimYes}"/>
+								<Text text="{i18n>no}" visible="{/claimNo}"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
@@ -90,27 +157,7 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<FormattedText htmlText="{i18n>privacyText}" width="100%"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="{i18n>date}">
-						<f:fields>
-							<Input width="50%" id="luogo" value="{/luogo}"/>
-							<Input width="50%" id="data" value="{/data}"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="{i18n>signature}">
-						<f:fields>
-							<Input width="50%" id="signature" value="{/signature}"/>
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
-			<f:FormContainer title="{i18n>note}">
-				<f:formElements>
-					<f:FormElement>
-						<f:fields>
-							<Text text="{/noteInv}" width="100%"/>
+							<FormattedText htmlText="{i18n>privacyText}"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

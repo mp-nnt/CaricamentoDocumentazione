@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table">
-	<f:Form editable="true" id="statementForm" width="100%">
+	<f:Form editable="true" id="statementForm" width="100%" class="dichiarazioni-form">
 		<f:layout>
 			<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
 				emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
@@ -9,13 +9,8 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<RadioButtonGroup class="sapUiMediumMarginBottom" id="company_grp"
-								editable="{path: '/company_vrf', formatter: '.formatter.editableFormatter'}">
-								<buttons>
-									<RadioButton text="{i18n>until9}" selected="{/until9}" groupName="gr_company"/>
-									<RadioButton text="{i18n>between9and49}" selected="{/between9and49}" groupName="gr_company"/>
-								</buttons>
-							</RadioButtonGroup>
+							<Text text="{i18n>until9}" visible="{/until9}"/>
+							<Text text="{i18n>between9and49}" visible="{/between9and49}"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -35,12 +30,18 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText1}" width="100%"/>
-								<CheckBox text="{i18n>newFactory}" selected="{/newFactory}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>increaseFactory}" selected="{/increaseFactory}"
-									editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>newGood}" selected="{/newGood}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>newProcess}" selected="{/newProcess}" editable="{path: '/claim_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<FormattedText htmlText="{i18n>claimText2}" width="100%"/>
+								<Text text="{i18n>newFactory}" visible="{/newFactory}"/>
+								<TextArea id="tableC_1" value="{/tableC_1}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newFactory}"
+									editable="false"/>
+								<Text text="{i18n>increaseFactory}" visible="{/increaseFactory}"/>
+								<TextArea id="tableC_2" value="{/tableC_2}" growing="true" width="100%" class="investimento-form-textarea" visible="{/increaseFactory}"
+									editable="false"/>
+								<Text text="{i18n>newGood}" visible="{/newGood}"/>
+								<TextArea id="tableC_3" value="{/tableC_3}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newGood}"
+									editable="false"/>
+								<Text text="{i18n>newProcess}" visible="{/newProcess}"/>
+								<TextArea id="tableC_4" value="{/tableC_4}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newProcess}"
+									editable="false"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
@@ -51,21 +52,21 @@
 					<f:FormElement>
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>claim3_1}" selected="{/claim3_1}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>claim3_2}" selected="{/claim3_2}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>claim3_3}" selected="{/claim3_3}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<t:Table rows="{/claim3_tbl}" selectionMode="None" visibleRowCount="5">
+								<Text text="{i18n>claim3_1}" visible="{/claim3_1}" wrapping="true"/>
+								<Text text="{i18n>claim3_2}" visible="{/claim3_2}" wrapping="true"/>
+								<Text text="{i18n>claim3_3}" visible="{/claim3_3}" wrapping="true"/>
+								<t:Table rows="{/claim3_tbl}" selectionMode="None" visibleRowCount="4">
 									<t:columns>
 										<t:Column>
 											<Label text="{i18n>claim3_tipo}"/>
 											<t:template>
-												<Input value="{tipologia}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+												<Input value="{tipologia}" class="dichiarazioni-form-input" editable="false"/>
 											</t:template>
 										</t:Column>
 										<t:Column>
 											<Label text="{i18n>claim3_importo}"/>
 											<t:template>
-												<Input value="{importoEuro}" editable="{path: '/claim3_vrf', formatter: '.formatter.editableFormatter'}"/>
+												<Input value="{importoEuro}" type="Number" class="dichiarazioni-form-input" editable="false"/>
 											</t:template>
 										</t:Column>
 									</t:columns>
@@ -80,50 +81,53 @@
 					<f:FormElement label="{i18n>score30}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score30_1}" selected="{/score30_1}" wrapping="true"
-									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score30_2}" selected="{/score30_2}" wrapping="true"
-									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score30_3}" selected="{/score30_3}" wrapping="true"
-									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score30_4}" selected="{/score30_4}" wrapping="true"
-									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score30_5}" selected="{/score30_5}" wrapping="true"
-									editable="{path: '/claimScore30_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<Text text="{i18n>score30_1}" visible="{/score30_1}" wrapping="true"/>
+								<Text text="{i18n>score30_2}" visible="{/score30_2}" wrapping="true"/>
+								<Text text="{i18n>score30_3}" visible="{/score30_3}" wrapping="true"/>
+								<Text text="{i18n>score30_4}" visible="{/score30_4}" wrapping="true"/>
+								<Text text="{i18n>score30_5}" visible="{/score30_5}" wrapping="true"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>score15}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score15_1}" selected="{/score15_1}" wrapping="true"
-									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score15_2}" selected="{/score15_2}" wrapping="true"
-									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score15_3}" selected="{/score15_3}" wrapping="true"
-									editable="{path: '/claimScore15_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<Text text="{i18n>score15_1}" visible="{/score15_1}" wrapping="true"/>
+								<Text id="_score15" text="{i18n>score15_2}" visible="{= !(${/score15_2_1} &amp;&amp; ${/score15_2_2} &amp;&amp; ${/score15_2_3})}"
+									wrapping="true"/>
+								<HBox>
+									<VBox width='10%'/>
+									<VBox>
+										<Text text="{i18n>score15_2_1}" visible="{/score15_2_1}" wrapping="true"/>
+										<Text text="{i18n>score15_2_2}" visible="{/score15_2_2}" wrapping="true"/>
+										<Text text="{i18n>score15_2_3}" visible="{/score15_2_3}" wrapping="true"/>
+									</VBox>
+								</HBox>
+								<Text text="{i18n>score15_3}" visible="{/score15_3}" wrapping="true"/>
 							</VBox>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>score10}">
 						<f:fields>
 							<VBox>
-								<CheckBox text="{i18n>score10_1}" selected="{/score10_1}" wrapping="true"
-									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score10_2}" selected="{/score10_2}" wrapping="true"
-									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
-								<CheckBox text="{i18n>score10_3}" selected="{/score10_3}" wrapping="true"
-									editable="{path: '/claimScore10_vrf', formatter: '.formatter.editableFormatter'}"/>
+								<Text text="{i18n>score10_1}" visible="{/score10_1}" wrapping="true"/>
+								<Text text="{i18n>score10_2}"
+									visible="{= !(${/score10_2_1} &amp;&amp; ${/score10_2_2} &amp;&amp; ${/score10_2_3} &amp;&amp; ${/score10_2_4} &amp;&amp; ${/score10_2_5} &amp;&amp; ${/score10_2_6} &amp;&amp; ${/score10_2_7})}"
+									wrapping="true"/>
+								<HBox>
+									<VBox width='10%'/>
+									<VBox>
+										<Text text="{i18n>score10_2_1}" visible="{/score10_2_1}" wrapping="true"/>
+										<Text text="{i18n>score10_2_2}" visible="{/score10_2_2}" wrapping="true"/>
+										<Text text="{i18n>score10_2_3}" visible="{/score10_2_3}" wrapping="true"/>
+										<Text text="{i18n>score10_2_4}" visible="{/score10_2_4}" wrapping="true"/>
+										<Text text="{i18n>score10_2_5}" visible="{/score10_2_5}" wrapping="true"/>
+										<Text text="{i18n>score10_2_6}" visible="{/score10_2_6}" wrapping="true"/>
+										<Text text="{i18n>score10_2_7}" visible="{/score10_2_7}" wrapping="true"/>
+									</VBox>
+								</HBox>
+								<Text text="{i18n>score10_3}" visible="{/score10_3}" wrapping="true"/>
 							</VBox>
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
-			<f:FormContainer title="{i18n>note}">
-				<f:formElements>
-					<f:FormElement>
-						<f:fields>
-							<Text text="{/noteStat}" width="100%"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
