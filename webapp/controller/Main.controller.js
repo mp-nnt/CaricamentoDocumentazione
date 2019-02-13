@@ -16,33 +16,38 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel({
 				"items": []
 			}), "uploadedDocument");
-		},
 
-		onAfterRendering: function () {
+			var that = this;
 
-			var oModel = this.getView().getModel();
-			var oDocUplModel = this.getView().getModel("uploadedDocument");
-			var oDocUplModelData = oDocUplModel.getData();
-			var data = oModel.getData();
+			$(window).bind("load", function () {
+				var oModel = that.getView().getModel();
+				var oDocUplModel = that.getView().getModel("uploadedDocument");
+				var oDocUplModelData = oDocUplModel.getData();
+				var data = oModel.getData();
 
-			for (var i in data.CartaIdentità) {
-				oDocUplModelData.items.push(data.CartaIdentità[i]);
-			}
-			for (var i in data.Preventivi) {
-				oDocUplModelData.items.push(data.Preventivi[i]);
-			}
-			for (var i in data.Dichiarazioni) {
-				oDocUplModelData.items.push(data.Dichiarazioni[i]);
-			}
-			for (var i in data.Pagamenti) {
-				oDocUplModelData.items.push(data.Pagamenti[i]);
-			}
-			for (var i in data.Altro) {
-				oDocUplModelData.items.push(data.Altro[i]);
-			}
+				for (var i in data.CartaIdentità) {
+					data.CartaIdentità[i].Type = "Carta d'Identità";
+					oDocUplModelData.items.push(data.CartaIdentità[i]);
+				}
+				for (var i in data.Preventivi) {
+					data.Preventivi[i].Type = "Preventivo";
+					oDocUplModelData.items.push(data.Preventivi[i]);
+				}
+				for (var i in data.Dichiarazioni) {
+					data.Dichiarazioni[i].Type = "Dichiarazione";
+					oDocUplModelData.items.push(data.Dichiarazioni[i]);
+				}
+				for (var i in data.Pagamenti) {
+					data.Pagamenti[i].Type = "Pagamenti";
+					oDocUplModelData.items.push(data.Pagamenti[i]);
+				}
+				for (var i in data.Altro) {
+					data.Altro[i].Type = "Altro";
+					oDocUplModelData.items.push(data.Altro[i]);
+				}
 
-			oDocUplModel.refresh();
-
+				oDocUplModel.refresh();
+			});
 		},
 
 		// ---------------------------------------------------------------------------------- Start funzioni generiche
@@ -131,9 +136,10 @@ sap.ui.define([
 					"X-CSRF-Token": token
 				},
 				success: function (result, xhr, data) {
-					var oModel = this.getView().getModel();
-					this.getOwnerComponent().taskId = result[result.length - 1].id;
+					this.taskId = result[result.length - 1].id;
+					//this.getOwnerComponent().taskId = result[result.length - 1].id;
 					if (toComplete) {
+						var oModel = this.getView().getModel();
 						this._completeTask(this.getOwnerComponent().taskId, oModel, token);
 					}
 				}.bind(this),
@@ -222,8 +228,6 @@ sap.ui.define([
 			};
 
 			var batchSuccess = function (oData) {
-				var reqGuid = oData.__batchResponses[0].__changeResponses[0].data.Guid;
-				this.getView().getModel().setProperty("Guid", reqGuid);
 				this.getView().setBusy(false);
 				sap.m.MessageToast.show("Richiesta aggiornata");
 				this.getView().byId("btn_save").setEnabled(false);
@@ -251,8 +255,8 @@ sap.ui.define([
 			var oDataModel = this.getView().getModel("oData");
 			var entity = {};
 			entity["Guid"] = oModel.getProperty("/Guid");
-
-			oDataModel.update("/nuovaRichiestaSet", entity, param);
+			var sPath = "/nuovaRichiestaSet(Guid='" + entity["Guid"] + "')";
+			oDataModel.update(sPath, entity, param);
 
 		},
 

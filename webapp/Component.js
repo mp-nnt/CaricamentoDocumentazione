@@ -26,6 +26,8 @@ sap.ui.define([
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 
+			this.taskId = null;
+
 			// get WF task data ---> solo se richiamato nella inbox
 
 			if (this.getComponentData() !== undefined) {
@@ -65,6 +67,8 @@ sap.ui.define([
 			if (this.taskId === null) {
 
 				// errore
+				var sPath = "model/emptyModel.json";
+				this.setModel(new sap.ui.model.json.JSONModel(sPath));
 
 			} else {
 

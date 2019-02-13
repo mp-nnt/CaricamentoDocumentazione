@@ -1,20 +1,36 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table"
 	xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc">
 	<f:Form editable="true" id="attachmentForm" width="100%">
 		<f:layout>
-			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
-				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+			<f:ResponsiveGridLayout singleContainerFullSize="true"/>
 		</f:layout>
 		<f:formContainers>
 			<f:FormContainer title="{i18n>UplAttach}">
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<List id="documentsList" items="{uploadedDocument>/items}">
-								<items>
-									<ObjectListItem title="{fileName}"></ObjectListItem>
-								</items>
-							</List>
+							<t:Table selectionMode="None" rows="{uploadedDocument>/items}">
+								<t:columns>
+									<t:Column>
+										<Label text="{i18n>Type}" textAlign="Center"/>
+										<t:template>
+											<Text text="{uploadedDocument>Type}"/>
+										</t:template>
+									</t:Column>
+									<t:Column>
+										<Label text="{i18n>Name}" textAlign="Center"/>
+										<t:template>
+											<Text text="{uploadedDocument>fileName}"/>
+										</t:template>
+									</t:Column>
+									<t:Column>
+										<Label text="{i18n>date}" textAlign="Center"/>
+										<t:template>
+											<Text text="{uploadedDocument>fileUploadDate}"/>
+										</t:template>
+									</t:Column>
+								</t:columns>
+							</t:Table>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
