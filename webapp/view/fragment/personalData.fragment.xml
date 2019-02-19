@@ -1,27 +1,9 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
 	<f:Form editable="true" id="personalDataForm" width="100%" class="personal-data-form">
 		<f:layout>
-			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
-				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+			<f:GridLayout singleColumn="true"/>
 		</f:layout>
 		<f:formContainers>
-			<f:FormContainer title="{i18n>stamp_duty}">
-				<f:formElements>
-					<f:FormElement label="{i18n>stamp_duty_id}" id="stamp_duty_id_lbl">
-						<f:fields>
-							<MaskInput width="50%" id="stamp_duty_id_inp" value="{/stamp_duty_id}" mask="9999999999" placeholder="{i18n>stamp_duty_claim}"
-								class="personal-data-form-input" editable="false"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="{i18n>stamp_duty_date}" id="stamp_duty_date_lbl">
-						<f:fields>
-							<DatePicker id="PlDate" width="50%"
-								value="{path: '/stamp_duty_date', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}"
-								placeholder="{i18n>ph_stamp_duty_date}" editable="false" class="personal-data-form-input"/>
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
 			<f:FormContainer title="{i18n>requester}" id="requester">
 				<f:formElements>
 					<f:FormElement label="{i18n>surname}" id="surname_lbl">
@@ -41,21 +23,25 @@
 					</f:FormElement>
 					<f:FormElement label="{i18n>piva}" id="piva_lbl">
 						<f:fields>
-							<Input width="50%" id="piva_inp" value="{/piva}" editable="false" class="personal-data-form-input"/>
+							<Input width="50%" id="piva_inp" value="{/piva}" change="onUserInfo" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>fiscalCode}" id="fiscalCode_lbl">
 						<f:fields>
-							<Input width="50%" id="fiscalCode_inp" value="{/fiscalCode}" editable="false" class="personal-data-form-input"/>
+							<Input width="50%" id="fiscalCode_inp" value="{/fiscalCode}" change="onUserInfo" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>sector}" id="sector_lbl">
 						<f:fields>
-							<Text text="{i18n>craft}" visible="{/craft}"/>
-							<Text text="{i18n>industry}" visible="{/industry}"/>
-							<Text text="{i18n>trade}" visible="{/trade}"/>
-							<Text text="{i18n>services}" visible="{/services}"/>
-							<Text text="{i18n>freelance}" visible="{/freelance}"/>
+							<RadioButtonGroup id="sector_grp">
+								<buttons>
+									<RadioButton text="{i18n>craft}" selected="{/craft}" groupName="gr_sector"/>
+									<RadioButton text="{i18n>industry}" selected="{/industry}" groupName="gr_sector"/>
+									<RadioButton text="{i18n>trade}" selected="{/trade}" groupName="gr_sector"/>
+									<RadioButton text="{i18n>services}" selected="{/services}" groupName="gr_sector"/>
+									<RadioButton text="{i18n>freelance}" selected="{/freelance}" groupName="gr_sector"/>
+								</buttons>
+							</RadioButtonGroup>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>state}" id="state_lbl">
@@ -115,8 +101,12 @@
 					</f:FormElement>
 					<f:FormElement label="{i18n>language}" id="language_lbl">
 						<f:fields>
-							<Text text="{i18n>italian}" visible="{/italian}"/>
-							<Text text="{i18n>german}" visible="{/german}"/>
+							<RadioButtonGroup id="language_grp" columns="2">
+								<buttons>
+									<RadioButton text="{i18n>italian}" selected="{/italian}" groupName="gr_language"/>
+									<RadioButton text="{i18n>german}" selected="{/german}" groupName="gr_language"/>
+								</buttons>
+							</RadioButtonGroup>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

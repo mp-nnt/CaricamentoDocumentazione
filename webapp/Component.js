@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/pabz/CaricamentoDocumentazione/model/models"
+	"com/pabz/PresentazioneDomanda/model/models"
 ], function (UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("com.pabz.CaricamentoDocumentazione.Component", {
+	return UIComponent.extend("com.pabz.PresentazioneDomanda.Component", {
 
 		metadata: {
 			manifest: "json"
@@ -26,8 +26,6 @@ sap.ui.define([
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 
-			this.taskId = null;
-
 			// get WF task data ---> solo se richiamato nella inbox
 
 			if (this.getComponentData() !== undefined) {
@@ -42,31 +40,29 @@ sap.ui.define([
 					action: "Confirm",
 					label: "Conferma"
 				}, function (button) {
-					sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").onConfirm();
+					sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").onConfirm();
 					this._refreshTask();
 				}, this);
 				startupParameters.inboxAPI.addAction({
 					action: "Save",
 					label: "Salva Bozza"
 				}, function (button) {
-					sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").onSave();
+					sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").onSave();
 					this._refreshTask();
 				}, this);
 
 			} else {
 
-				this.instanceId = "";
-
-				this.instanceId = sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getInstanceId();
-				sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getTaskIdFromInstance(this.instanceId);
+				this.instanceId = sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").getInstanceIdParam();
+				this.taskId = sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").getTaskId(this.instanceId);
 
 			}
 
 			// initialize WF model
 
-			if (this.taskId === null) {
+			if (this.instanceId === null) {
 
-				// errore
+				// creo nuovo wf	
 				var sPath = "model/emptyModel.json";
 				this.setModel(new sap.ui.model.json.JSONModel(sPath));
 

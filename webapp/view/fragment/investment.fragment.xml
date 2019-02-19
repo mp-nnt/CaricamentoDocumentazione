@@ -2,8 +2,7 @@
 	xmlns:u="sap.ui.unified">
 	<f:Form editable="true" id="investmentForm" width="100%" class="investimento-form">
 		<f:layout>
-			<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
-				emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+			<f:GridLayout singleColumn="true"/>
 		</f:layout>
 		<f:formContainers>
 			<f:FormContainer title="{i18n>tableA}">
@@ -11,13 +10,19 @@
 					<f:FormElement>
 						<f:fields>
 							<t:Table selectionMode="None" rows="{/tableA}" visibleRowCount="5">
+								<t:extension>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://add" press="addRows" type="Transparent"/>
+									</OverflowToolbar>
+								</t:extension>
 								<t:columns>
 									<t:Column sortProperty="tipologia" filterProperty="tipologia">
 										<t:multiLabels>
 											<Label text="Tipologia degli investimenti e luogo" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{tipologia}" editable="false" class="investimento-form-input"/>
+											<Input value="{tipologia}" class="investimento-form-input"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="inizio" filterProperty="inizio" headerSpan="2,1">
@@ -27,7 +32,7 @@
 										</t:multiLabels>
 										<t:template>
 											<DatePicker value="{path: 'inizio', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
-												editable="false" class="investimento-form-input"/>
+												minDate="{date>/inizio}" maxDate="{date>/fine}" valueState="{statei}" valueStateText="{stateValuei}"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="fine" filterProperty="fine">
@@ -37,7 +42,7 @@
 										</t:multiLabels>
 										<t:template>
 											<DatePicker value="{path: 'fine', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
-												editable="false" class="investimento-form-input"/>
+												minDate="{date>/inizio}" maxDate="{date>/fine}" valueState="{statef}" valueStateText="{stateValuef}"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="importoEuro" filterProperty="importoEuro">
@@ -45,7 +50,7 @@
 											<Label text="Imponibile Euro" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableAChange" editable="false"
+											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableAChange"
 												class="investimento-form-input"/>
 										</t:template>
 									</t:Column>
@@ -79,7 +84,7 @@
 											<Label text="Luogo" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{luogo}" editable="false" class="investimento-form-input"/>
+											<Input value="{luogo}" class="investimento-form-input"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="inizio" filterProperty="inizio" headerSpan="2,1">
@@ -89,7 +94,7 @@
 										</t:multiLabels>
 										<t:template>
 											<DatePicker value="{path: 'inizio', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
-												editable="false" class="investimento-form-input"/>
+												minDate="{date>/inizio}" maxDate="{date>/fine}" valueState="{statei}" valueStateText="{stateValuei}"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="fine" filterProperty="fine">
@@ -99,7 +104,7 @@
 										</t:multiLabels>
 										<t:template>
 											<DatePicker value="{path: 'fine', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}" placeholder=" "
-												editable="false" class="investimento-form-input"/>
+												minDate="{date>/inizio}" maxDate="{date>/fine}" valueState="{statef}" valueStateText="{stateValuef}"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="importoEuro" filterProperty="importoEuro">
@@ -107,7 +112,7 @@
 											<Label text="Imponibile Euro" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableBChange" editable="false"
+											<Input value="{path:'importoEuro', type:'sap.ui.model.type.Currency'}" textAlign="Right" change="onTableBChange"
 												class="investimento-form-input"/>
 										</t:template>
 									</t:Column>
@@ -137,9 +142,30 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText3}" width="100%"/>
-								<Text text="{i18n>yes}" visible="{/claimYes}"/>
-								<Text text="{i18n>no}" visible="{/claimNo}"/>
+								<RadioButtonGroup class="sapUiMediumMarginBottom" id="grp" columns="2">
+									<buttons>
+										<RadioButton text="{i18n>yes}" selected="{/claimYes}" groupName="gr"/>
+										<RadioButton text="{i18n>no}" selected="{/claimNo}" groupName="gr"/>
+									</buttons>
+								</RadioButtonGroup>
 							</VBox>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+			<f:FormContainer title="{i18n>stamp_duty}">
+				<f:formElements>
+					<f:FormElement label="{i18n>stamp_duty_id}" id="stamp_duty_id_lbl">
+						<f:fields>
+							<MaskInput width="50%" id="stamp_duty_id_inp" value="{/stamp_duty_id}" mask="9999999999" placeholder="{i18n>stamp_duty_claim}"
+								class="personal-data-form-input"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="{i18n>stamp_duty_date}" id="stamp_duty_date_lbl">
+						<f:fields>
+							<DatePicker id="PlDate" width="50%"
+								value="{path: '/stamp_duty_date', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}"
+								placeholder="{i18n>ph_stamp_duty_date}" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -158,6 +184,17 @@
 					<f:FormElement>
 						<f:fields>
 							<FormattedText htmlText="{i18n>privacyText}"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="{i18n>date}">
+						<f:fields>
+							<Input width="50%" id="luogo" value="{/luogo}" class="investimento-form-input"/>
+							<Input width="50%" id="data" value="{/data}" class="investimento-form-input"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="{i18n>signature}">
+						<f:fields>
+							<Input width="50%" id="signature" value="{/signature}" class="investimento-form-input"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

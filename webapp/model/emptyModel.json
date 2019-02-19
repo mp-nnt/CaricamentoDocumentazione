@@ -1,4 +1,5 @@
 {
+	"processType": "GAP",
 	"stamp_duty_id": "",
 	"stamp_duty_date": "",
 	"surname": "",
@@ -7,7 +8,7 @@
 	"piva": "",
 	"fiscalCode": "",
 	"craft": false,
-	"industry": true,
+	"industry": false,
 	"trade": false,
 	"services": false,
 	"freelance": false,
@@ -29,9 +30,9 @@
 	"between9and49": false,
 	"newFactory": false,
 	"increaseFactory": false,
-	"newGood": true,
+	"newGood": false,
 	"newProcess": false,
-	"claim3_1": true,
+	"claim3_1": false,
 	"claim3_2": false,
 	"claim3_3": false,
 	"claim3_tbl": [{
@@ -50,18 +51,18 @@
 		"tipologia": "",
 		"importoEuro": ""
 	}],
-	"score30_1": true,
+	"score30_1": false,
 	"score30_2": false,
 	"score30_3": false,
 	"score30_4": false,
 	"score30_5": false,
-	"score15_1": true,
+	"score15_1": false,
 	"score15_2": false,
 	"score15_2_1": false,
 	"score15_2_2": false,
 	"score15_2_3": false,
 	"score15_3": false,
-	"score10_1": true,
+	"score10_1": false,
 	"score10_2": false,
 	"score10_2_1": false,
 	"score10_2_2": false,
@@ -73,30 +74,50 @@
 	"score10_3": false,
 	"noteStat": "",
 	"tableA": [{
-		"tipologia": "Arredi",
+		"tipologia": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": "100"
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}],
 	"totalA": 0,
 	"tableB": [{
@@ -104,19 +125,31 @@
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Hardware",
-		"luogo": "Bolzano",
+		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": "2012"
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Software funzionali",
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Macchinari ed impianti",
 		"luogo": "",
@@ -128,7 +161,11 @@
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Attrezzature",
 		"luogo": "",
@@ -140,19 +177,31 @@
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Veicoli per il trasporto di persone",
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}, {
 		"tipologia": "Veicoli per il trasporto di cose",
 		"luogo": "",
 		"inizio": "",
 		"fine": "",
-		"importoEuro": ""
+		"importoEuro": "",
+		"statei": "None",
+		"stateValuei": "",
+		"statef": "None",
+		"stateValuef": ""
 	}],
 	"totalB": 0,
 	"tableC_1": "",
@@ -164,49 +213,22 @@
 	"luogo": "",
 	"data": "",
 	"signature": "",
-	"CartaIdentità": [{
-		"fileId": "",
-		"fileName": "CartaIdentità",
-		"fileMimeType": "",
-		"fileDimension": "",
-		"fileExtension": "",
-		"fileUploadDate": "",
-		"fileContent": ""
+	"Settlement": [{
+		"fornitore": "",
+		"descrizione": "",
+		"fattura": "",
+		"dataS": "",
+		"imponibile": ""
+	}, {
+		"fornitore": "",
+		"descrizione": "",
+		"fattura": "",
+		"dataS": "",
+		"imponibile": ""
 	}],
-	"Preventivi": [{
-		"fileId": "",
-		"fileName": "Preventivi",
-		"fileMimeType": "",
-		"fileDimension": "",
-		"fileExtension": "",
-		"fileUploadDate": "",
-		"fileContent": ""
-	}],
-	"Dichiarazioni": [{
-		"fileId": "",
-		"fileName": "Dichiarazioni",
-		"fileMimeType": "",
-		"fileDimension": "",
-		"fileExtension": "",
-		"fileUploadDate": "",
-		"fileContent": ""
-	}],
-	"Pagamenti": [{
-		"fileId": "",
-		"fileName": "Pagamenti",
-		"fileMimeType": "",
-		"fileDimension": "",
-		"fileExtension": "",
-		"fileUploadDate": "",
-		"fileContent": ""
-	}],
-	"Altro": [{
-		"fileId": "",
-		"fileName": "Altro",
-		"fileMimeType": "",
-		"fileDimension": "",
-		"fileExtension": "",
-		"fileUploadDate": "",
-		"fileContent": ""
-	}]
+	"CartaIdentita": [],
+	"Preventivi": [],
+	"Dichiarazioni": [],
+	"Pagamenti": [],
+	"Altro": []
 }

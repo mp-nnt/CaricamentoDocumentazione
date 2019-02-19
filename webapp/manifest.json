@@ -1,7 +1,7 @@
 {
 	"_version": "1.8.0",
 	"sap.app": {
-		"id": "com.pabz.CaricamentoDocumentazione",
+		"id": "com.pabz.PresentazioneDomanda",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
@@ -46,7 +46,7 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "com.pabz.CaricamentoDocumentazione.view.Main",
+			"viewName": "com.pabz.PresentazioneDomanda.view.Main",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -65,7 +65,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "com.pabz.CaricamentoDocumentazione.i18n.i18n"
+					"bundleName": "com.pabz.PresentazioneDomanda.i18n.i18n"
 				}
 			},
 			"oData": {
@@ -91,7 +91,7 @@
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
 				"async": true,
-				"viewPath": "com.pabz.CaricamentoDocumentazione.view",
+				"viewPath": "com.pabz.PresentazioneDomanda.view",
 				"controlAggregation": "pages",
 				"controlId": "idAppControl",
 				"clearControlAggregation": false
