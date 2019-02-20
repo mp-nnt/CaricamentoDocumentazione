@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/pabz/PresentazioneDomanda/model/models"
+	"com/pabz/CaricamentoDocumentazione/model/models"
 ], function (UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("com.pabz.PresentazioneDomanda.Component", {
+	return UIComponent.extend("com.pabz.CaricamentoDocumentazione.Component", {
 
 		metadata: {
 			manifest: "json"
@@ -28,33 +28,35 @@ sap.ui.define([
 
 			// get WF task data ---> solo se richiamato nella inbox
 
+			this.taskId = null;
+
 			if (this.getComponentData() !== undefined) {
 				var startupParameters = this.getComponentData().startupParameters;
 				var taskModel = startupParameters.taskModel;
 				var taskData = taskModel.getData();
 				this.taskId = taskData.InstanceID;
-				this.instanceId = sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getInstanceIdFromTask(this.taskId);
+				this.instanceId = sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getInstanceId(this.taskId);
 
 				//add actions ---> valido solo nella inbox => andranno aggiunte direttamente nell'applicazione 
 				startupParameters.inboxAPI.addAction({
 					action: "Confirm",
 					label: "Conferma"
 				}, function (button) {
-					sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").onConfirm();
+					sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").onConfirm();
 					this._refreshTask();
 				}, this);
 				startupParameters.inboxAPI.addAction({
 					action: "Save",
 					label: "Salva Bozza"
 				}, function (button) {
-					sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").onSave();
+					sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").onSave();
 					this._refreshTask();
 				}, this);
 
 			} else {
 
-				this.instanceId = sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").getInstanceIdParam();
-				this.taskId = sap.ui.controller("com.pabz.PresentazioneDomanda.controller.Main").getTaskId(this.instanceId);
+				this.instanceId = sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getInstanceIdParam();
+				this.taskId = sap.ui.controller("com.pabz.CaricamentoDocumentazione.controller.Main").getTaskId(this.instanceId);
 
 			}
 

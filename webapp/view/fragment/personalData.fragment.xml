@@ -13,7 +13,7 @@
 					</f:FormElement>
 					<f:FormElement label="{i18n>name}" id="name_lbl">
 						<f:fields>
-							<Input width="50%" id="name_inp" value="{/name}" editable="false" class="personal-data-form-input"/>
+							<Input width="50%" value="{/name}" editable="false" class="personal-data-form-input" id="name_inp"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>owner}" id="owner_lbl">
@@ -23,25 +23,23 @@
 					</f:FormElement>
 					<f:FormElement label="{i18n>piva}" id="piva_lbl">
 						<f:fields>
-							<Input width="50%" id="piva_inp" value="{/piva}" change="onUserInfo" class="personal-data-form-input"/>
+							<Input width="50%" id="piva_inp" value="{/piva}" editable="false" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>fiscalCode}" id="fiscalCode_lbl">
 						<f:fields>
-							<Input width="50%" id="fiscalCode_inp" value="{/fiscalCode}" change="onUserInfo" class="personal-data-form-input"/>
+							<Input width="50%" id="fiscalCode_inp" value="{/fiscalCode}" editable="false" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>sector}" id="sector_lbl">
 						<f:fields>
-							<RadioButtonGroup id="sector_grp">
-								<buttons>
-									<RadioButton text="{i18n>craft}" selected="{/craft}" groupName="gr_sector"/>
-									<RadioButton text="{i18n>industry}" selected="{/industry}" groupName="gr_sector"/>
-									<RadioButton text="{i18n>trade}" selected="{/trade}" groupName="gr_sector"/>
-									<RadioButton text="{i18n>services}" selected="{/services}" groupName="gr_sector"/>
-									<RadioButton text="{i18n>freelance}" selected="{/freelance}" groupName="gr_sector"/>
-								</buttons>
-							</RadioButtonGroup>
+							<VBox>
+								<Input width="50%" editable="false" value="{i18n>craft}" visible="{/craft}" class="personal-data-form-input"/>
+								<Input width="50%" editable="false" value="{i18n>industry}" visible="{/industry}" class="personal-data-form-input"/>
+								<Input width="50%" editable="false" value="{i18n>trade}" visible="{/trade}" class="personal-data-form-input"/>
+								<Input width="50%" editable="false" value="{i18n>services}" visible="{/services}" class="personal-data-form-input"/>
+								<Input width="50%" editable="false" value="{i18n>freelance}" visible="{/freelance}" class="personal-data-form-input"/>
+							</VBox>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="{i18n>state}" id="state_lbl">
@@ -99,14 +97,12 @@
 							<Input width="50%" id="iban_inp" value="{/iban}" editable="false" class="personal-data-form-input"/>
 						</f:fields>
 					</f:FormElement>
-					<f:FormElement label="{i18n>language}" id="language_lbl">
+					<f:FormElement label="{i18n>language}" id="lang_lbl">
 						<f:fields>
-							<RadioButtonGroup id="language_grp" columns="2">
-								<buttons>
-									<RadioButton text="{i18n>italian}" selected="{/italian}" groupName="gr_language"/>
-									<RadioButton text="{i18n>german}" selected="{/german}" groupName="gr_language"/>
-								</buttons>
-							</RadioButtonGroup>
+							<VBox>
+								<Input width="50%" editable="false" value="{i18n>italian}" visible="{/italian}" class="personal-data-form-input"/>
+								<Input width="50%" editable="false" value="{i18n>german}" visible="{/german}" class="personal-data-form-input"/>
+							</VBox>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>

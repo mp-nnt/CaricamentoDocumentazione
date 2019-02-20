@@ -1,7 +1,7 @@
 {
 	"_version": "1.8.0",
 	"sap.app": {
-		"id": "com.pabz.PresentazioneDomanda",
+		"id": "com.pabz.CaricamentoDocumentazione",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
@@ -39,14 +39,11 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "com.pabz.PresentazioneDomanda.view.Main",
+			"viewName": "com.pabz.CaricamentoDocumentazione.view.Main",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -65,7 +62,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "com.pabz.PresentazioneDomanda.i18n.i18n"
+					"bundleName": "com.pabz.CaricamentoDocumentazione.i18n.i18n"
 				}
 			},
 			"oData": {
@@ -80,31 +77,25 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
 				"async": true,
-				"viewPath": "com.pabz.PresentazioneDomanda.view",
+				"viewPath": "com.pabz.CaricamentoDocumentazione.view",
 				"controlAggregation": "pages",
 				"controlId": "idAppControl",
 				"clearControlAggregation": false
 			},
-			"routes": [
-				{
-					"name": "RouteMain",
-					"pattern": "RouteMain",
-					"target": [
-						"TargetMain"
-					]
-				}
-			],
+			"routes": [{
+				"name": "RouteMain",
+				"pattern": "RouteMain",
+				"target": ["TargetMain"]
+			}],
 			"targets": {
 				"TargetMain": {
 					"viewType": "XML",
@@ -116,7 +107,7 @@
 		}
 	},
 	"sap.platform.hcp": {
-		"uri": "webapp",
+		"uri": "",
 		"_version": "1.1.0"
 	}
 }
