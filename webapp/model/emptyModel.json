@@ -230,5 +230,10 @@
 	"Preventivi": [],
 	"Dichiarazioni": [],
 	"Pagamenti": [],
-	"Altro": []
+	"Altro": [],
+	"CartaIdentitaNew": [],
+	"PreventiviNew": [],
+	"DichiarazioniNew": [],
+	"PagamentiNew": [],
+	"AltroNew": []
 }

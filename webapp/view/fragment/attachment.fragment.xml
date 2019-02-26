@@ -9,9 +9,11 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<List id="documentsList" items="{uploadedDocument>/items}">
+							<List id="documentsList"
+								items="{ path: 'uploadedDocument>/items', sorter: { path: 'uploadedDocument>Type', descending: false, group: true }}">
 								<items>
-									<ObjectListItem title="{fileName}"></ObjectListItem>
+									<StandardListItem title="{uploadedDocument>fileName}" description="{uploadedDocument>text}" icon="" iconDensityAware="false"
+										iconInset="false"></StandardListItem>
 								</items>
 							</List>
 						</f:fields>
@@ -20,4 +22,163 @@
 			</f:FormContainer>
 		</f:formContainers>
 	</f:Form>
+	<Panel expandable="true" expanded="false" headerText="Carta d'Identità" visible="false" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<UploadCollection id="CartaIdentita" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
+				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}" selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated"
+				items="{ path: '/CartaIdentitaNew', templateShareable: false }" numberOfAttachmentsText="" showSeparators="{settings>/showSeparators}"
+				uploadEnabled="{settings>/uploadEnabled}" uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
+				<toolbar>
+					<OverflowToolbar id="toolbarCartaIdentita">
+						<Title id="attachmentTitleCartaIdentita"/>
+						<ToolbarSpacer/>
+						<Button id="deleteSelectedButtonCartaIdentita" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false"
+							type="Transparent"/>
+						<ToggleButton id="selectAllButtonCartaIdentita" text="Select all" press="onSelectAllPress" enabled="false" visible="false"
+							type="Transparent"/>
+						<Button id="downloadSelectedButtonCartaIdentita" icon="sap-icon://download" press="onDownloadSelectedItems" enabled="true" visible="true"
+							type="Transparent"/>
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<items>
+					<UploadCollectionItem documentId="{fileId}" fileName="{fileName}" mimeType="{fileMimeType}" thumbnailUrl="{fileThumbnailUrl}"
+						url="{fileURL}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}" visibleDelete="{settings>/visibleDelete}"
+						visibleEdit="{settings>/visibleEdit}" attributes="{path : 'attributes', templateShareable : false}" selected="{selected}">
+						<attributes>
+							<ObjectAttribute title="{title}" text="{path : 'text', formatter : '.formatAttribute'}" active="{active}" press="onAttributePress"/>
+						</attributes>
+					</UploadCollectionItem>
+				</items>
+			</UploadCollection>
+		</content>
+	</Panel>
+	<Panel expandable="true" expanded="false" headerText="Preventivi" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<UploadCollection id="Preventivi" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
+				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}" selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated"
+				items="{ path: '/PreventiviNew', templateShareable: false }" numberOfAttachmentsText="" showSeparators="{settings>/showSeparators}"
+				uploadEnabled="{settings>/uploadEnabled}" uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
+				<toolbar>
+					<OverflowToolbar id="toolbarPreventivi">
+						<Title id="attachmentTitlePreventivi"/>
+						<ToolbarSpacer/>
+						<Button id="deleteSelectedButtonPreventivi" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false" type="Transparent"/>
+						<ToggleButton id="selectAllButtonPreventivi" text="Select all" press="onSelectAllPress" enabled="false" visible="false" type="Transparent"/>
+						<Button id="downloadSelectedButtonPreventivi" icon="sap-icon://download" press="onDownloadSelectedItems" enabled="true" visible="true"
+							type="Transparent"/>
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<items>
+					<UploadCollectionItem documentId="{fileId}" fileName="{fileName}" mimeType="{fileMimeType}" thumbnailUrl="{fileThumbnailUrl}"
+						url="{fileURL}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}" visibleDelete="{settings>/visibleDelete}"
+						visibleEdit="{settings>/visibleEdit}" attributes="{path : 'attributes', templateShareable : false}" selected="{selected}">
+						<attributes>
+							<ObjectAttribute title="{title}" text="{path : 'text', formatter : '.formatAttribute'}" active="{active}" press="onAttributePress"/>
+						</attributes>
+					</UploadCollectionItem>
+				</items>
+			</UploadCollection>
+		</content>
+	</Panel>
+	<Panel expandable="true" expanded="false" headerText="Dichiarazioni" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<UploadCollection id="Dichiarazioni" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
+				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}" selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated"
+				items="{ path: '/DichiarazioniNew', templateShareable: false }" numberOfAttachmentsText="" showSeparators="{settings>/showSeparators}"
+				uploadEnabled="{settings>/uploadEnabled}" uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
+				<toolbar>
+					<OverflowToolbar id="toolbarDichiarazioni">
+						<Title id="attachmentTitleDichiarazioni"/>
+						<ToolbarSpacer/>
+						<Button id="deleteSelectedButtonDichiarazioni" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false"
+							type="Transparent"/>
+						<ToggleButton id="selectAllButtonDichiarazioni" text="Select all" press="onSelectAllPress" enabled="false" visible="false"
+							type="Transparent"/>
+						<Button id="downloadSelectedButtonDichiarazioni" icon="sap-icon://download" press="onDownloadSelectedItems" enabled="true" visible="true"
+							type="Transparent"/>
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<items>
+					<UploadCollectionItem documentId="{fileId}" fileName="{fileName}" mimeType="{fileMimeType}" thumbnailUrl="{fileThumbnailUrl}"
+						url="{fileURL}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}" visibleDelete="{settings>/visibleDelete}"
+						visibleEdit="{settings>/visibleEdit}" attributes="{path : 'attributes', templateShareable : false}" selected="{selected}">
+						<attributes>
+							<ObjectAttribute title="{title}" text="{path : 'text', formatter : '.formatAttribute'}" active="{active}" press="onAttributePress"/>
+						</attributes>
+					</UploadCollectionItem>
+				</items>
+			</UploadCollection>
+		</content>
+	</Panel>
+	<Panel expandable="true" expanded="false" headerText="Pagamenti" visible="false" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<UploadCollection id="Pagamenti" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
+				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}" selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated"
+				items="{ path: '/PagamentiNew', templateShareable: false }" numberOfAttachmentsText="" showSeparators="{settings>/showSeparators}"
+				uploadEnabled="{settings>/uploadEnabled}" uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
+				<toolbar>
+					<OverflowToolbar id="toolbarPagamenti">
+						<Title id="attachmentTitlePagamenti"/>
+						<ToolbarSpacer/>
+						<Button id="deleteSelectedButtonPagamenti" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false" type="Transparent"/>
+						<ToggleButton id="selectAllButtonPagamenti" text="Select all" press="onSelectAllPress" enabled="false" visible="false" type="Transparent"/>
+						<Button id="downloadSelectedButtonPagamenti" icon="sap-icon://download" press="onDownloadSelectedItems" enabled="true" visible="true"
+							type="Transparent"/>
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<items>
+					<UploadCollectionItem documentId="{fileId}" fileName="{fileName}" mimeType="{fileMimeType}" thumbnailUrl="{fileThumbnailUrl}"
+						url="{fileURL}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}" visibleDelete="{settings>/visibleDelete}"
+						visibleEdit="{settings>/visibleEdit}" attributes="{path : 'attributes', templateShareable : false}" selected="{selected}">
+						<attributes>
+							<ObjectAttribute title="{title}" text="{path : 'text', formatter : '.formatAttribute'}" active="{active}" press="onAttributePress"/>
+						</attributes>
+					</UploadCollectionItem>
+				</items>
+			</UploadCollection>
+		</content>
+	</Panel>
+	<Panel expandable="true" expanded="false" headerText="Altro" width="auto" class="sapUiResponsiveMargin">
+		<content>
+			<UploadCollection id="Altro" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
+				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed" fileType="{fileTypes>/selected}" selectionChange="onSelectionChange" typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts" uploadTerminated="onUploadTerminated"
+				items="{ path: '/AltroNew', templateShareable: false }" numberOfAttachmentsText="" showSeparators="{settings>/showSeparators}"
+				uploadEnabled="{settings>/uploadEnabled}" uploadButtonInvisible="{=!${settings>/uploadButtonVisible}}" mode="{settings>/mode}">
+				<toolbar>
+					<OverflowToolbar id="toolbarAltro">
+						<Title id="attachmentTitleAltro"/>
+						<ToolbarSpacer/>
+						<Button id="deleteSelectedButtonAltro" text="Delete" press="onDeleteSelectedItems" enabled="false" visible="false" type="Transparent"/>
+						<ToggleButton id="selectAllButtonAltro" text="Select all" press="onSelectAllPress" enabled="false" visible="false" type="Transparent"/>
+						<Button id="downloadSelectedButtonAltro" icon="sap-icon://download" press="onDownloadSelectedItems" enabled="true" visible="true"
+							type="Transparent"/>
+						<UploadCollectionToolbarPlaceholder/>
+					</OverflowToolbar>
+				</toolbar>
+				<items>
+					<UploadCollectionItem documentId="{fileId}" fileName="{fileName}" mimeType="{fileMimeType}" thumbnailUrl="{fileThumbnailUrl}"
+						url="{fileURL}" enableEdit="{settings>/enableEdit}" enableDelete="{settings>/enableDelete}" visibleDelete="{settings>/visibleDelete}"
+						visibleEdit="{settings>/visibleEdit}" attributes="{path : 'attributes', templateShareable : false}" selected="{selected}">
+						<attributes>
+							<ObjectAttribute title="{title}" text="{path : 'text', formatter : '.formatAttribute'}" active="{active}" press="onAttributePress"/>
+						</attributes>
+					</UploadCollectionItem>
+				</items>
+			</UploadCollection>
+		</content>
+	</Panel>
 </core:FragmentDefinition>
