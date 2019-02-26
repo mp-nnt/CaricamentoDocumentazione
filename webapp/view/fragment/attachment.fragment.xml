@@ -1,28 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
 	xmlns:u="sap.ui.unified" xmlns:mvc="sap.ui.core.mvc">
-	<f:Form editable="true" id="attachmentForm" width="100%">
-		<f:layout>
-			<f:GridLayout singleColumn="true"/>
-		</f:layout>
-		<f:formContainers>
-			<f:FormContainer title="{i18n>UplAttach}">
-				<f:formElements>
-					<f:FormElement>
-						<f:fields>
-							<List id="documentsList"
-								items="{ path: 'uploadedDocument>/items', sorter: { path: 'uploadedDocument>Type', descending: false, group: true }}">
-								<items>
-									<StandardListItem title="{uploadedDocument>fileName}" description="{uploadedDocument>text}" icon="" iconDensityAware="false"
-										iconInset="false"></StandardListItem>
-								</items>
-							</List>
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
-		</f:formContainers>
-	</f:Form>
-	<Panel expandable="true" expanded="false" headerText="Carta d'Identità" visible="false" width="auto" class="sapUiResponsiveMargin">
+	<Panel expandable="true" expanded="false" headerText="{i18n>CartaIdentita}" visible="false" width="auto" class="sapUiResponsiveMargin">
 		<content>
 			<UploadCollection id="CartaIdentita" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
 				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
@@ -55,7 +33,7 @@
 			</UploadCollection>
 		</content>
 	</Panel>
-	<Panel expandable="true" expanded="false" headerText="Preventivi" width="auto" class="sapUiResponsiveMargin">
+	<Panel expandable="true" expanded="false" headerText="{i18n>Preventivi}" width="auto" class="sapUiResponsiveMargin">
 		<content>
 			<UploadCollection id="Preventivi" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
 				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
@@ -86,7 +64,7 @@
 			</UploadCollection>
 		</content>
 	</Panel>
-	<Panel expandable="true" expanded="false" headerText="Dichiarazioni" width="auto" class="sapUiResponsiveMargin">
+	<Panel expandable="true" expanded="false" headerText="{i18n>Dichiarazioni}" width="auto" class="sapUiResponsiveMargin">
 		<content>
 			<UploadCollection id="Dichiarazioni" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
 				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
@@ -119,7 +97,7 @@
 			</UploadCollection>
 		</content>
 	</Panel>
-	<Panel expandable="true" expanded="false" headerText="Pagamenti" visible="false" width="auto" class="sapUiResponsiveMargin">
+	<Panel expandable="true" expanded="false" headerText="{i18n>Pagamenti}" visible="false" width="auto" class="sapUiResponsiveMargin">
 		<content>
 			<UploadCollection id="Pagamenti" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
 				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
@@ -150,7 +128,7 @@
 			</UploadCollection>
 		</content>
 	</Panel>
-	<Panel expandable="true" expanded="false" headerText="Altro" width="auto" class="sapUiResponsiveMargin">
+	<Panel expandable="true" expanded="false" headerText="{i18n>Altro}" width="auto" class="sapUiResponsiveMargin">
 		<content>
 			<UploadCollection id="Altro" maximumFilenameLength="{settings>/maximumFilenameLength}" maximumFileSize="{settings>/maximumFileSize}"
 				multiple="true" change="onChange" fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileRenamed="onFileRenamed"
@@ -181,4 +159,26 @@
 			</UploadCollection>
 		</content>
 	</Panel>
+	<f:Form editable="true" id="attachmentForm" width="100%">
+		<f:layout>
+			<f:GridLayout singleColumn="true"/>
+		</f:layout>
+		<f:formContainers>
+			<f:FormContainer title="{i18n>UplAttach}">
+				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<List id="documentsList"
+								items="{ path: 'uploadedDocument>/items', sorter: { path: 'uploadedDocument>Type', descending: false, group: true }}">
+								<items>
+									<StandardListItem title="{uploadedDocument>fileName}" description="{uploadedDocument>text}" icon="" iconDensityAware="false"
+										iconInset="false"></StandardListItem>
+								</items>
+							</List>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+		</f:formContainers>
+	</f:Form>
 </core:FragmentDefinition>

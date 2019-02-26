@@ -80,62 +80,19 @@ sap.ui.define([
 
 			$(window).bind("load", function () {
 
-				var oModel = that.getView().getModel();
+				var oData = that.getView().getModel().getData();
 				var oDocUplModel = that.getView().getModel("uploadedDocument");
 				var oDocUplModelData = oDocUplModel.getData();
-				var data = oModel.getData();
-				var text;
-				var row;
+				var attributesText = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
+				var i;
+				var length = that.ArrayId.length;
 
-				for (var i in data.CartaIdentità) {
-					row = data.CartaIdentità[i];
-					text = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
-					//Data di caricamento: &1 - Dimensione: &2
-					text = text.replace("&1", row.fileUploadDate);
-					text = text.replace("&2", row.fileDimension);
-					row.Type = "Carta d'Identità";
-					row.text = text;
-					oDocUplModelData.items.push(row);
-				}
-				for (var i in data.Preventivi) {
-					row = data.Preventivi[i];
-					text = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
-					//Data di caricamento: &1 - Dimensione: &2
-					text = text.replace("&1", row.fileUploadDate);
-					text = text.replace("&2", row.fileDimension);
-					row.Type = "Preventivo";
-					row.text = text;
-					oDocUplModelData.items.push(row);
-				}
-				for (var i in data.Dichiarazioni) {
-					row = data.Dichiarazioni[i];
-					text = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
-					//Data di caricamento: &1 - Dimensione: &2
-					text = text.replace("&1", row.fileUploadDate);
-					text = text.replace("&2", row.fileDimension);
-					row.Type = "Dichiarazione";
-					row.text = text;
-					oDocUplModelData.items.push(row);
-				}
-				for (var i in data.Pagamenti) {
-					row = data.Pagamenti[i];
-					text = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
-					//Data di caricamento: &1 - Dimensione: &2
-					text = text.replace("&1", row.fileUploadDate);
-					text = text.replace("&2", row.fileDimension);
-					row.Type = "Pagamenti";
-					row.text = text;
-					oDocUplModelData.items.push(row);
-				}
-				for (var i in data.Altro) {
-					row = data.Altro[i];
-					text = that.getView().getModel("i18n").getResourceBundle().getText("attachText");
-					//Data di caricamento: &1 - Dimensione: &2
-					text = text.replace("&1", row.fileUploadDate);
-					text = text.replace("&2", row.fileDimension);
-					row.Type = "Altro";
-					row.text = text;
-					oDocUplModelData.items.push(row);
+				for (i = 0; i < length; i++) {
+					var property = oData[that.ArrayId[i]];
+					var rowType = that.getView().getModel("i18n").getResourceBundle().getText(that.ArrayId[i]);
+					for (var k in property) {
+						that._getDocRow(property[k], rowType, oDocUplModelData, attributesText);
+					}
 				}
 
 				oDocUplModel.refresh();
@@ -145,6 +102,16 @@ sap.ui.define([
 		},
 
 		// ---------------------------------------------------------------------------------- Start funzioni generiche
+
+		_getDocRow: function (row, typeText, oDocModelData, attributesText) {
+			var attributesTextRow;
+			//Data di caricamento: &1 - Dimensione: &2
+			attributesTextRow = attributesText.replace("&1", row.fileUploadDate);
+			attributesTextRow = attributesTextRow.replace("&2", row.fileDimension);
+			row.text = attributesTextRow;
+			row.Type = typeText;
+			oDocModelData.items.push(row);
+		},
 
 		// ---------------------------------------------------------------------------------- End funzioni generiche
 
@@ -377,16 +344,23 @@ sap.ui.define([
 			var length = this.ArrayId.length;
 			var oModel = this.getView().getModel();
 			var oData = oModel.getData();
+			var oDocUplModel = this.getView().getModel("uploadedDocument");
+			var oDocUplModelData = oDocUplModel.getData();
+			var attributesText = this.getView().getModel("i18n").getResourceBundle().getText("attachText");
 
 			for (i = 0; i < length; i++) {
 				var propertyNew = oData[this.ArrayIdNew[i]];
 				var property = oData[this.ArrayId[i]];
+				var rowType = this.getView().getModel("i18n").getResourceBundle().getText(this.ArrayId[i]);
+
 				for (var k in propertyNew) {
 					property.push(propertyNew[k]);
+					this._getDocRow(property[k], rowType, oDocUplModelData, attributesText);
 				}
 				oData[this.ArrayIdNew[i]] = [];
 			}
 			oModel.refresh();
+			oDocUplModel.refresh();
 
 			this.completeTask(false);
 
