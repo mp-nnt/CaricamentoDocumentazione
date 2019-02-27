@@ -99,6 +99,20 @@ sap.ui.define([
 
 			});
 
+			var oData1 = { //nuovo Modello creato per le scelte nell'investment
+				"ScelteInvestment": [{
+					"ChoiceId": "A",
+					"Name": "Beni strumentali"
+				}, {
+					"ChoiceId": "B",
+					"Name": "Altri Beni"
+				}]
+			};
+
+			// set explored app's demo model on this sample
+			var oModel = new JSONModel(oData1);
+			this.getView().setModel(oModel, "ScelteInvestment");
+
 		},
 
 		// ---------------------------------------------------------------------------------- Start funzioni generiche
@@ -678,6 +692,29 @@ sap.ui.define([
 		},
 
 		// ---------------------------------------------------------------------------------- End File Uploader
+
+		onDataModel_2: function (oEvent) {
+			var oModel = this.getView().getModel(); //VARIABILE LOCALE oModel
+			var tableA = oModel.getProperty("/tableA");
+			var a = oEvent.getSource().getBindingContext().sPath.substring(8);
+			tableA[a].tipologia.key = oEvent.getSource().getSelectedKey();
+			if (tableA[a].tipologia.key === "A") {
+				tableA[a].tipologia.name = "Beni strumentali";
+			} else if (tableA[a].tipologia.key === "B") {
+				tableA[a].tipologia.name = "Altri Beni";
+			}
+			//	debugger;
+
+			//
+
+			for (var i in tableA) {
+				if (tableA[i].tipologia.key != "") {
+					tableA[i].tipo = "None";
+				}
+			}
+			oModel.refresh();
+
+		}
 
 	});
 });

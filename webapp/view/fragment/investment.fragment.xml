@@ -9,14 +9,23 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<t:Table selectionMode="None" rows="{/tableA}" visibleRowCount="5">
+							<t:Table rows="{/tableA}" selectionMode="None" visibleRowCount="4">
 								<t:columns>
 									<t:Column sortProperty="tipologia" filterProperty="tipologia">
 										<t:multiLabels>
-											<Label text="Tipologia degli investimenti e luogo" textAlign="Center" width="100%"/>
+											<Label text="{i18n>InvTipologia_1}" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{tipologia}" editable="false" class="investimento-form-input"/>
+											<Input value="{path: 'tipologia/name'}" textAlign="Right" change="onDataModel_2" valueState="{tipo}" valueStateText="{i18n>InsTest_2}"
+												editable="false" class="investimento-form-input"/>
+										</t:template>
+									</t:Column>
+									<t:Column sortProperty="descrizione" filterProperty="descrizione">
+										<t:multiLabels>
+											<Label text="{i18n>InvDescrizione}" textAlign="Center" width="100%"/>
+										</t:multiLabels>
+										<t:template>
+											<Input value="{descrizione}" class="investimento-form-input" editable="false"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="inizio" filterProperty="inizio" headerSpan="2,1">

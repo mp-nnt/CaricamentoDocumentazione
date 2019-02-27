@@ -74,58 +74,94 @@
 	"score10_3": false,
 	"noteStat": "",
 	"tableA": [{
-		"tipologia": "",
-		"inizio": "",
-		"fine": "",
-		"importoEuro": "",
+		"tipologia": {
+			"key": "A",
+			"name": "Beni strumentali"
+		},
+		"descrizione": "",
+		"inizio": "2019-02-26T00:00:00.000Z",
+		"fine": "2019-05-08T00:00:00.000Z",
+		"importoEuro": [
+			22220,
+			null
+		],
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
-		"stateValuef": ""
+		"stateValuef": "",
+		"tipo": "None",
+		"tipo_1": ""
 	}, {
-		"tipologia": "",
+		"tipologia": [{
+			"key": "",
+			"name": ""
+		}],
+		"descrizione": "",
 		"inizio": "",
 		"fine": "",
 		"importoEuro": "",
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
-		"stateValuef": ""
+		"stateValuef": "",
+		"tipo": "None",
+		"tipo_1": ""
 	}, {
-		"tipologia": "",
+		"tipologia": [{
+			"key": "",
+			"name": ""
+		}],
+		"descrizione": "",
 		"inizio": "",
 		"fine": "",
 		"importoEuro": "",
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
-		"stateValuef": ""
+		"stateValuef": "",
+		"tipo": "None",
+		"tipo_1": ""
 	}, {
-		"tipologia": "",
+		"tipologia": [{
+			"key": "",
+			"name": ""
+		}],
+		"descrizione": "",
 		"inizio": "",
 		"fine": "",
 		"importoEuro": "",
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
-		"stateValuef": ""
+		"stateValuef": "",
+		"tipo": "None",
+		"tipo_1": ""
 	}, {
-		"tipologia": "",
+		"tipologia": [{
+			"key": "",
+			"name": ""
+		}],
+		"descrizione": "",
 		"inizio": "",
 		"fine": "",
 		"importoEuro": "",
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
-		"stateValuef": ""
+		"stateValuef": "",
+		"tipo": "None",
+		"tipo_1": ""
 	}],
 	"totalA": 0,
 	"tableB": [{
 		"tipologia": "Arredamenti",
-		"luogo": "",
-		"inizio": "",
-		"fine": "",
-		"importoEuro": "",
+		"luogo": "armadio",
+		"inizio": "2019-02-26T00:00:00.000Z",
+		"fine": "2019-05-16T00:00:00.000Z",
+		"importoEuro": [
+			3322,
+			null
+		],
 		"statei": "None",
 		"stateValuei": "",
 		"statef": "None",
