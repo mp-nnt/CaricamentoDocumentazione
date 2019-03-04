@@ -251,3 +251,12 @@ html.sap-desktop .sapContrast.sapMIBar.sapMFooter-CTX {
     font-weight: bold;
     font-size: 18px;
 }
+
+.attach_box_name {
+    margin-top: 0rem!important;
+    margin-left: 1rem!important;
+}
+
+.attach_box_label {
+    margin-top: -1.5rem!important;
+}

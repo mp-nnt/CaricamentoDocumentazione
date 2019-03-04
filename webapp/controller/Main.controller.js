@@ -96,6 +96,43 @@ sap.ui.define([
 				}
 
 				oDocUplModel.refresh();
+				var oModel = that.getView().getModel();
+				var tableA = oModel.getProperty("/tableA");
+				var tableB = oModel.getProperty("/tableB");
+
+				for (var i in tableA) { //ciclo della tableA
+
+					if (tableA[i].inizio != "") { //controlla se il campo inizio è valorizzato (diverso da vuoto)
+						tableA[i].inizio = new Date(tableA[i].inizio); //trasforma la data da stringa in oggetto
+					}
+					oModel.refresh(); //refresh del modello, permette la visualizzazione a frontend
+
+					if (tableA[i].fine != "") { //stessa proceduta per il campo fine
+						tableA[i].fine = new Date(tableA[i].fine);
+					}
+					oModel.refresh();
+
+				}
+
+				for (var i in tableB) { //ciclo della tableB
+
+					if (tableB[i].inizio != "") { //controlla se il campo inizio è valorizzato (diverso da vuoto)
+						tableB[i].inizio = new Date(tableB[i].inizio); //trasforma la data da stringa in oggetto
+					}
+					oModel.refresh(); //refresh del modello, permette la visualizzazione a frontend
+
+					if (tableB[i].fine != "") { //stessa proceduta per il campo fine
+						tableB[i].fine = new Date(tableB[i].fine);
+					}
+					oModel.refresh();
+
+				}
+
+				//controllo per il secondo input della data (relativo a Marca da bollo)
+				var dataMB = oModel.getProperty("/stamp_duty_date"); //chiamo la variabile
+				dataMB = new Date(dataMB); //trasformazione da stringa ad oggetto
+				oModel.setProperty("/stamp_duty_date", dataMB); //set della propriety con la nuova variabile perchè non teneva in memoria il cambiamento
+				oModel.refresh(); //refresh del modello
 
 			});
 
@@ -122,9 +159,71 @@ sap.ui.define([
 			//Data di caricamento: &1 - Dimensione: &2
 			attributesTextRow = attributesText.replace("&1", row.fileUploadDate);
 			attributesTextRow = attributesTextRow.replace("&2", row.fileDimension);
+
+			var blobForURL = this.base64toBlob(row.fileContent, row.fileMimeType);
+			var fileURL = URL.createObjectURL(blobForURL);
+			row.fileURL = fileURL;
+			row.icon = this.switchIcon(row.fileMimeType);
 			row.text = attributesTextRow;
 			row.Type = typeText;
 			oDocModelData.items.push(row);
+		},
+
+		onDownloadUplAttach: function () {
+			var oModel = this.getView().getModel("uploadedDocument");
+			var selectedItemsProperty = this.byId("documentsList").getSelectedContextPaths()[0];
+			var downloadableContent = oModel.getProperty(selectedItemsProperty);
+
+			var blob = this.base64toBlob(downloadableContent.fileContent, downloadableContent.fileMimeType);
+			var objectURL = URL.createObjectURL(blob);
+
+			var link = document.createElement('a');
+			link.style.display = 'none';
+			document.body.appendChild(link);
+
+			link.href = objectURL;
+			link.href = URL.createObjectURL(blob);
+			link.download = downloadableContent.fileName;
+			link.click();
+		},
+
+		switchIcon: function (type) {
+			var icon;
+			switch (type) {
+			case "image/jpeg":
+				icon = "sap-icon://card";
+				break;
+			case "image/png":
+				icon = "sap-icon://card";
+				break;
+			case "text/plain":
+				icon = "sap-icon://document-text";
+				break;
+			case "application/mspowerpoint":
+				icon = "sap-icon://ppt-attachment";
+				break;
+			case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+				icon = "sap-icon://ppt-attachment";
+				break;
+			case "application/msword":
+				icon = "sap-icon://doc-attachment";
+				break;
+			case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+				icon = "sap-icon://doc-attachment";
+				break;
+			case "application/excel":
+				icon = "sap-icon://excel-attachment";
+				break;
+			case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+				icon = "sap-icon://excel-attachment";
+				break;
+			case "application/pdf":
+				icon = "sap-icon://pdf-attachment";
+				break;
+			default:
+				icon = "sap-icon://document";
+			}
+			return icon;
 		},
 
 		// ---------------------------------------------------------------------------------- End funzioni generiche
@@ -463,7 +562,7 @@ sap.ui.define([
 			that.uploadJSON.fileId = jQuery.now().toString();
 			that.uploadJSON.fileName = file.name;
 			that.uploadJSON.fileMimeType = file.type;
-			that.uploadJSON.fileDimension = (file.size / 1000).toFixed(1) + " kB";
+			that.uploadJSON.fileDimension = (file.size / 1000).toFixed(2) + " kB";
 			that.uploadJSON.fileExtension = file.name.split(".")[1];
 			that.uploadJSON.fileUploadDate = new Date(jQuery.now()).toLocaleDateString();
 			reader.onload = function (e) {

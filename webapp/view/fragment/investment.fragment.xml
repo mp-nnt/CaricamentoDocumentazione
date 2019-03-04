@@ -16,8 +16,8 @@
 											<Label text="{i18n>InvTipologia_1}" textAlign="Center" width="100%"/>
 										</t:multiLabels>
 										<t:template>
-											<Input value="{path: 'tipologia/name'}" textAlign="Right" change="onDataModel_2" valueState="{tipo}" valueStateText="{i18n>InsTest_2}"
-												editable="false" class="investimento-form-input"/>
+											<Input value="{path: 'tipologia/name'}" textAlign="Right" valueState="{tipo}" valueStateText="{i18n>InsTest_2}" editable="false"
+												class="investimento-form-input"/>
 										</t:template>
 									</t:Column>
 									<t:Column sortProperty="descrizione" filterProperty="descrizione">

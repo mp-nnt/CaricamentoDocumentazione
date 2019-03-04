@@ -164,15 +164,32 @@
 			<f:GridLayout singleColumn="true"/>
 		</f:layout>
 		<f:formContainers>
-			<f:FormContainer title="{i18n>UplAttach}">
+			<f:FormContainer >
+				<f:toolbar>
+					<Toolbar id="toolbarAttach">
+						<Title id="toolbarTitleAttach" text="{i18n>UplAttach}"/>
+						<ToolbarSpacer/>
+						<Button id="downloadAttach" icon="sap-icon://download" press="onDownloadUplAttach" enabled="true" visible="true"/>
+					</Toolbar>
+				</f:toolbar>
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
 							<List id="documentsList"
-								items="{ path: 'uploadedDocument>/items', sorter: { path: 'uploadedDocument>Type', descending: false, group: true }}">
+								items="{ path: 'uploadedDocument>/items', sorter: { path: 'uploadedDocument>Type', descending: false, group: true }}"
+								mode="SingleSelectMaster">
 								<items>
-									<StandardListItem title="{uploadedDocument>fileName}" description="{uploadedDocument>text}" icon="" iconDensityAware="false"
-										iconInset="false"></StandardListItem>
+									<CustomListItem>
+										<HBox>
+											<core:Icon size="2.5rem" src="{uploadedDocument>icon}" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"/>
+											<VBox class="attach_box_name">
+												<Link text="{uploadedDocument>fileName}" target="_blank" href="{uploadedDocument>fileURL}"/>
+												<VBox class="attach_box_label">
+													<Text text="{uploadedDocument>text}"/>
+												</VBox>
+											</VBox>
+										</HBox>
+									</CustomListItem>
 								</items>
 							</List>
 						</f:fields>
