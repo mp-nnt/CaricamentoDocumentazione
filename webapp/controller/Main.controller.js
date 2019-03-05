@@ -136,20 +136,6 @@ sap.ui.define([
 
 			});
 
-			var oData1 = { //nuovo Modello creato per le scelte nell'investment
-				"ScelteInvestment": [{
-					"ChoiceId": "A",
-					"Name": "Beni strumentali"
-				}, {
-					"ChoiceId": "B",
-					"Name": "Altri Beni"
-				}]
-			};
-
-			// set explored app's demo model on this sample
-			var oModel = new JSONModel(oData1);
-			this.getView().setModel(oModel, "ScelteInvestment");
-
 		},
 
 		// ---------------------------------------------------------------------------------- Start funzioni generiche
@@ -372,10 +358,8 @@ sap.ui.define([
 			this.getView().setBusyIndicatorDelay(0);
 			this.getView().setBusy(true);
 
-			// completo task e creo la richiesta
 			this.completeTask(true);
 			this.requestUpdate();
-
 		},
 
 		requestUpdate: function () {
@@ -392,7 +376,27 @@ sap.ui.define([
 			var batchSuccess = function (oData) {
 				this._updateUploadedFile();
 				this.getView().setBusy(false);
-				sap.m.MessageToast.show("Richiesta aggiornata");
+
+				var data = this.getView().getModel().getData();
+				var guid = data.guid;
+
+				var oDataModel = this.getView().getModel("oData");
+				var sPath = "/nuovaRichiestaSet(Guid='" + guid + "',ObjectId='')";
+				var richiestaAggiornata = this.getView().getModel("i18n").getResourceBundle().getText("RichiestaAggiornata");
+				oDataModel.read(sPath, {
+					"success": function (oData) {
+						//Richiesta creata Codice protocollo: &1 - Codice fascicolo: &2
+						var attributiRichiesta = this.getView().getModel("i18n").getResourceBundle().getText("AttributiRichiesta");
+						attributiRichiesta = attributiRichiesta.replace("&1", oData.Zzfld00001g);
+						attributiRichiesta = attributiRichiesta.replace("&2", oData.Zzfld000019);
+						sap.m.MessageToast.show(richiestaAggiornata + '\n' + attributiRichiesta);
+					}.bind(this),
+					"error": function (err) {
+						//è in errore il recupero degli attributi ma la richiesta è stata creata
+						sap.m.MessageToast.show(richiestaAggiornata);
+					}
+				});
+
 				this.getView().byId("btn_save").setEnabled(false);
 				this.getView().byId("btn_confirm").setEnabled(false);
 			}.bind(this);
@@ -406,7 +410,6 @@ sap.ui.define([
 			this._odataDocCreate(mParameters);
 			oModel.submitChanges({
 				"groupId": changeSetId,
-				//"changeSetId": changeSetId,
 				"success": batchSuccess,
 				"error": batchError
 			});
@@ -791,29 +794,6 @@ sap.ui.define([
 		},
 
 		// ---------------------------------------------------------------------------------- End File Uploader
-
-		onDataModel_2: function (oEvent) {
-			var oModel = this.getView().getModel(); //VARIABILE LOCALE oModel
-			var tableA = oModel.getProperty("/tableA");
-			var a = oEvent.getSource().getBindingContext().sPath.substring(8);
-			tableA[a].tipologia.key = oEvent.getSource().getSelectedKey();
-			if (tableA[a].tipologia.key === "A") {
-				tableA[a].tipologia.name = "Beni strumentali";
-			} else if (tableA[a].tipologia.key === "B") {
-				tableA[a].tipologia.name = "Altri Beni";
-			}
-			//	debugger;
-
-			//
-
-			for (var i in tableA) {
-				if (tableA[i].tipologia.key != "") {
-					tableA[i].tipo = "None";
-				}
-			}
-			oModel.refresh();
-
-		}
 
 	});
 });
