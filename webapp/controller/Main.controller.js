@@ -246,12 +246,15 @@ sap.ui.define([
 			var oModel = this.getView().getModel();
 			oModel.setProperty("/confirmDoc", false);
 
-			if (taskId === null) {
-				this._taskIdfromInstance(instanceId, token, true);
+			if (!approvalStatus) {
+				this.saveContext(instanceId);
 			} else {
-				this._completeTask(taskId, oModel, token);
+				if (taskId === null) {
+					this._taskIdfromInstance(instanceId, token, true);
+				} else {
+					this._completeTask(taskId, oModel, token);
+				}
 			}
-
 		},
 
 		_completeTask: function (taskId, oModel, token) {
@@ -362,6 +365,36 @@ sap.ui.define([
 			});
 			return taskId;
 
+		},
+
+		saveContext: function (instanceId) {
+			var successfulSave;
+			var token = this._fetchToken();
+			var oModel = this.getView().getModel();
+			var contextData = JSON.stringify({
+				context: oModel.getData()
+			});
+			$.ajax({
+				url: "/bpmworkflowruntime/rest/v1/workflow-instances/" + instanceId + "/context",
+				method: "PUT",
+				contentType: "application/json",
+				async: false,
+				headers: {
+					"X-CSRF-Token": token
+				},
+				data: contextData,
+				success: function (result, xhr, data) {
+					this.getView().setBusy(false);
+					successfulSave = true;
+					MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("BozSalv"));
+				}.bind(this),
+				error: function (data) {
+					this.getView().setBusy(false);
+					successfulSave = false;
+					MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("OpFallSalv"));
+				}.bind(this)
+			});
+			return successfulSave;
 		},
 
 		// ---------------------------------------------------------------------------------- End funzioni WF 
