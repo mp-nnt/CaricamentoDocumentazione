@@ -134,8 +134,31 @@ sap.ui.define([
 				oModel.setProperty("/stamp_duty_date", dataMB); //set della propriety con la nuova variabile perchè non teneva in memoria il cambiamento
 				oModel.refresh(); //refresh del modello
 
-			});
+				var guid = oData.guid;
 
+				var oDataModel = that.getView().getModel("oData");
+				var sPath = "/checkDocumentazioneMancanteSet('" + guid + "')";
+				//var docMancante = that.getView().getModel("i18n").getResourceBundle().getText("DocMancante");
+				oDataModel.read(sPath, {
+					"success": function (oDataResults) {
+
+						that.getView().byId("stampDuty").setVisible(oDataResults.StampDutyDocReq);
+						that.getView().byId("employee").setVisible(oDataResults.EmployeesDocReq);
+						that.getView().byId("newFactory").setVisible(oDataResults.NewFactoryDocReq);
+						that.getView().byId("increaseFactory").setVisible(oDataResults.IncreaseFactoryDocReq);
+						that.getView().byId("newGood").setVisible(oDataResults.NewGoodDocReq);
+						that.getView().byId("newProcess").setVisible(oDataResults.NewProcessDocReq);
+						that.getView().byId("claim31").setVisible(oDataResults.Claim31DocReq);
+						that.getView().byId("claim32").setVisible(oDataResults.Claim32DocReq);
+						that.getView().byId("claim33").setVisible(oDataResults.Claim33DocReq);
+
+					}.bind(that),
+					"error": function (err) {
+						sap.m.MessageToast.show(err.message);
+					}
+
+				});
+			});
 		},
 
 		// ---------------------------------------------------------------------------------- Start funzioni generiche

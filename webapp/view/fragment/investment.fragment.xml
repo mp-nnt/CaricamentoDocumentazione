@@ -154,6 +154,13 @@
 			</f:FormContainer>
 			<f:FormContainer title="{i18n>stamp_duty}">
 				<f:formElements>
+					<f:FormElement>
+						<f:fields>
+							<Text id="stampDuty" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+				<f:formElements>
 					<f:FormElement label="{i18n>stamp_duty_id}" id="stamp_duty_id_lbl">
 						<f:fields>
 							<MaskInput width="50%" id="stamp_duty_id_inp" value="{/stamp_duty_id}" mask="9999999999" placeholder="{i18n>stamp_duty_claim}"
@@ -162,7 +169,7 @@
 					</f:FormElement>
 					<f:FormElement label="{i18n>stamp_duty_date}" id="stamp_duty_date_lbl">
 						<f:fields>
-							<DatePicker id="PlDate" width="50%"
+							<DatePicker width="50%" id="PlDate"
 								value="{path: '/stamp_duty_date', type : 'sap.ui.model.odata.type.DateTime', constraints : {displayFormat : 'Date'}}"
 								placeholder="{i18n>ph_stamp_duty_date}" editable="false" class="personal-data-form-input"/>
 						</f:fields>

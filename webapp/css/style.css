@@ -260,3 +260,7 @@ html.sap-desktop .sapContrast.sapMIBar.sapMFooter-CTX {
 .attach_box_label {
     margin-top: -1.5rem!important;
 }
+
+.red {
+    color: #ff0000;
+}

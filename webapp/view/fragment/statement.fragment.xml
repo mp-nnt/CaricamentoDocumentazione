@@ -8,8 +8,11 @@
 				<f:formElements>
 					<f:FormElement>
 						<f:fields>
-							<Text text="{i18n>until9}" visible="{/until9}"/>
-							<Text text="{i18n>between9and49}" visible="{/between9and49}"/>
+							<VBox>
+								<Text text="{i18n>until9}" visible="{/until9}"/>
+								<Text text="{i18n>between9and49}" visible="{/between9and49}"/>
+							</VBox>
+							<Text id="employee" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
 						</f:fields>
 					</f:FormElement>
 				</f:formElements>
@@ -29,16 +32,28 @@
 						<f:fields>
 							<VBox>
 								<FormattedText htmlText="{i18n>claimText1}" width="100%"/>
-								<Text text="{i18n>newFactory}" visible="{/newFactory}"/>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>newFactory}" visible="{/newFactory}"/>
+									<Text id="newFactory" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
 								<TextArea id="tableC_1" value="{/tableC_1}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newFactory}"
 									editable="false"/>
-								<Text text="{i18n>increaseFactory}" visible="{/increaseFactory}"/>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>increaseFactory}" visible="{/increaseFactory}"/>
+									<Text id="increaseFactory" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
 								<TextArea id="tableC_2" value="{/tableC_2}" growing="true" width="100%" class="investimento-form-textarea" visible="{/increaseFactory}"
 									editable="false"/>
-								<Text text="{i18n>newGood}" visible="{/newGood}"/>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>newGood}" visible="{/newGood}"/>
+									<Text id="newGood" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
 								<TextArea id="tableC_3" value="{/tableC_3}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newGood}"
 									editable="false"/>
-								<Text text="{i18n>newProcess}" visible="{/newProcess}"/>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>newProcess}" visible="{/newProcess}"/>
+									<Text id="newProcess" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
 								<TextArea id="tableC_4" value="{/tableC_4}" growing="true" width="100%" class="investimento-form-textarea" visible="{/newProcess}"
 									editable="false"/>
 							</VBox>
@@ -51,9 +66,18 @@
 					<f:FormElement>
 						<f:fields>
 							<VBox>
-								<Text text="{i18n>claim3_1}" visible="{/claim3_1}" wrapping="true"/>
-								<Text text="{i18n>claim3_2}" visible="{/claim3_2}" wrapping="true"/>
-								<Text text="{i18n>claim3_3}" visible="{/claim3_3}" wrapping="true"/>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>claim3_1}" visible="{/claim3_1}" wrapping="true"/>
+									<Text id="claim31" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>claim3_2}" visible="{/claim3_2}" wrapping="true"/>
+									<Text id="claim32" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
+								<HBox justifyContent="SpaceBetween">
+									<Text text="{i18n>claim3_3}" visible="{/claim3_3}" wrapping="true"/>
+									<Text id="claim33" text="{i18n>DocMancante}" textAlign="Right" class="red"/>
+								</HBox>
 								<t:Table rows="{/claim3_tbl}" selectionMode="None" visibleRowCount="4">
 									<t:columns>
 										<t:Column>
