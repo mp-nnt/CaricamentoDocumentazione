@@ -371,9 +371,8 @@ sap.ui.define([
 			var successfulSave;
 			var token = this._fetchToken();
 			var oModel = this.getView().getModel();
-			var contextData = JSON.stringify({
-				context: oModel.getData()
-			});
+			var oData = oModel.getData();
+			var contextData = JSON.stringify(oData);
 			$.ajax({
 				url: "/bpmworkflowruntime/rest/v1/workflow-instances/" + instanceId + "/context",
 				method: "PUT",
