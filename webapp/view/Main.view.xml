@@ -11,15 +11,6 @@
 						<l:rootPaneContainer>
 							<l:PaneContainer orientation="Horizontal" id="container1">
 								<l:panes>
-									<l:SplitPane id="paneL">
-										<l:content>
-											<Panel backgroundDesign="Transparent" id="panelL">
-												<layoutData>
-													<l:SplitterLayoutData id="dataL" resizable="false" size="5%"/>
-												</layoutData>
-											</Panel>
-										</l:content>
-									</l:SplitPane>
 									<l:SplitPane requiredParentWidth="50" id="paneC">
 										<l:content>
 											<Panel backgroundDesign="Transparent" id="panelC">
@@ -48,15 +39,6 @@
 														</IconTabFilter>
 													</items>
 												</IconTabBar>
-											</Panel>
-										</l:content>
-									</l:SplitPane>
-									<l:SplitPane id="paneR">
-										<l:content>
-											<Panel backgroundDesign="Transparent" id="panelR">
-												<layoutData>
-													<l:SplitterLayoutData id="dataR" resizable="false" size="5%"/>
-												</layoutData>
 											</Panel>
 										</l:content>
 									</l:SplitPane>
