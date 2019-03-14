@@ -628,7 +628,7 @@ sap.ui.define([
 			};
 
 			reader.onerror = function (e) {
-				sap.m.MessageToast.show("Errore durante l'upload");
+				sap.m.MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("errUpl"));
 			};
 
 			reader.readAsDataURL(file);
@@ -682,7 +682,7 @@ sap.ui.define([
 		},
 
 		onFilenameLengthExceed: function () {
-			MessageToast.show("La lunghezza del nome del file è troppo grande.");
+			MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("fileLenghtExc"));
 		},
 
 		onFileRenamed: function (oEvent) {
@@ -701,11 +701,11 @@ sap.ui.define([
 		},
 
 		onFileSizeExceed: function () {
-			MessageToast.show("Il file caricato è troppo grande.");
+			MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("fileSizeExc"));
 		},
 
 		onTypeMissmatch: function () {
-			MessageToast.show("Il tipo di file caricato non è supportato.");
+			MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("typeMiss"));
 		},
 
 		onUploadComplete: function (oEvent) {
@@ -783,7 +783,10 @@ sap.ui.define([
 
 		getAttachmentTitleText: function (oUploadCollection) {
 			var aItems = this.byId(oUploadCollection).getItems();
-			return "N° di Allegati" + " (" + aItems.length + ")";
+			var nAllegati = this.getView().getModel("i18n").getResourceBundle().getText("Nallegati"); //i18n gestito con variabile dinamica
+			nAllegati = nAllegati.replace("%var%", aItems.length);
+
+			return nAllegati;
 		},
 
 		onModeChange: function (oEvent) {
