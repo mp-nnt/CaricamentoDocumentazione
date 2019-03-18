@@ -18,7 +18,7 @@ sap.ui.define([
 		onInit: function () {
 			this.getView().setModel(new JSONModel({
 				"items": []
-			}), "uploadedDocument");
+			}), "uploadedDocument"); //test
 
 			this.getView().setModel(new JSONModel({
 				"maximumFilenameLength": 80,
