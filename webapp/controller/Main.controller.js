@@ -244,9 +244,14 @@ sap.ui.define([
 			var instanceId = this.getOwnerComponent().instanceId;
 			var token = this._fetchToken();
 			var oModel = this.getView().getModel();
-			oModel.setProperty("/confirmDoc", false);
+			oModel.setProperty("/confirmDoc", false); //MODIFICA 27/03/2019 FALSE -> APPROVALSTATUS
 
 			if (!approvalStatus) {
+
+				var data = this.getView().getModel().getData();
+				//data.guid = "005056AD450D1EE99491474D7928C2C4";
+				data.guid = "005056AD450D1EE9948EE529E288C2C4";
+
 				this.saveContext(instanceId);
 			} else {
 				if (taskId === null) {
@@ -533,7 +538,7 @@ sap.ui.define([
 			oModel.refresh();
 			oDocUplModel.refresh();
 
-			this.completeTask(false);
+			this.completeTask(false); //MODIFICA 27/03/2019 FALSE -> TRUE
 
 		},
 
